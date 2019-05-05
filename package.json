@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://daesang-kim.github.io/office-htw",
   "dependencies": {
-    "cross-env": "^5.2.0",
+    "@material-ui/core": "^3.9.3",
     "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -12,8 +12,8 @@
     "react-scripts-ts": "3.1.0"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts-ts start",
-    "build": "cross-env NODE_PATH=src react-scripts-ts build",
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "predeploy": "npm run build",
