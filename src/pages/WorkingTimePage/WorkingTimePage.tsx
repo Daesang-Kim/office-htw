@@ -1,7 +1,7 @@
 import {
+  Button,
   TextField,
   WithStyles,
-  Button,
 } from '@material-ui/core';
 import * as React from 'react';
 import styles from './WorkingTimePageStyled';
@@ -10,87 +10,138 @@ interface IProps extends WithStyles<typeof styles> {
   
 }
 
-const WorkingTimePage: React.SFC<IProps> = () => (
-  <>
-    <h2>퇴근가능시간은?</h2>
-    <div>
-      <TextField
-        id="standard-number"
-        label="Monday"
-        // value={this.state.age}
-        // onChange={this.handleChange('age')}
-        type="number"
-        defaultValue="8"
-        // className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        margin="normal"
-      />
-      <TextField
-        id="standard-number"
-        label="Tuesday"
-        // value={this.state.age}
-        // onChange={this.handleChange('age')}
-        type="number"
-        defaultValue="8"
-        // className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        margin="normal"
-      />
-      <TextField
-        id="standard-number"
-        label="Wednesday"
-        // value={this.state.age}
-        // onChange={this.handleChange('age')}
-        type="number"
-        defaultValue="8"
-        // className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        margin="normal"
-      />
-      <TextField
-        id="standard-number"
-        label="Thursday"
-        // value={this.state.age}
-        // onChange={this.handleChange('age')}
-        type="number"
-        defaultValue="8"
-        // className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          step: 0.1, // 5 min
-        }}
-        margin="normal"
-      />
-      <TextField
-        id="time"
-        label="Friday"
-        type="time"
-        defaultValue="08:00"
-        // className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          step: 60, // 5 min
-        }}
-      />
-    </div>
-    <Button
-      variant="contained"
-      color="primary"
-      // className={classes.button}
-    >
-      {'적용'}
-    </Button>
-  </>
-)
+interface IState {
+  workTimeMon: number,
+  workTimeTue: number,
+  workTimeWed: number,
+  workTimeThu: number,
+}
+
+class WorkingTimePage extends React.Component<IProps, IState> {
+  public state: IState = {
+    workTimeMon: 8,
+    workTimeTue: 8,
+    workTimeWed: 8,
+    workTimeThu: 8,
+  }
+
+  public onChangeWorkingTime = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, container: string): void => {
+    const numberValue = Number.parseFloat(e.currentTarget.value);
+    if (Number.isNaN(numberValue)) {
+      return;
+    }
+    switch(container) {
+      case 'monday':
+        this.setState({
+          workTimeMon: numberValue,
+        });
+        break;
+      case 'tuesday':
+        this.setState({
+          workTimeTue: numberValue,
+        });
+        break;
+      case 'wednesday':
+        this.setState({
+          workTimeWed: numberValue,
+        });
+        break;
+      case 'thursday':
+        this.setState({
+          workTimeThu: numberValue,
+        });
+        break;
+      default:
+        break;
+    }
+    
+  }
+  
+  public render() {
+    return (
+      <>
+        <span><h2 style={{display: 'inline-block'}}>퇴근가능시간은?</h2></span><span><h3 style={{display: 'inline-block', color: 'red'}}>17:30</h3></span>
+        <h3>남은시간(8:00)</h3>
+        <div style={{display: 'flex', 'flex-direction': 'column'}}>
+          <TextField
+            id="standard-number"
+            label="Monday"
+            value={this.state.workTimeMon}
+            onChange={e => this.onChangeWorkingTime(e, 'monday')}
+            type="number"
+            defaultValue="8"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+          <TextField
+            id="standard-number"
+            label="Tuesday"
+            value={this.state.workTimeTue}
+            onChange={e => this.onChangeWorkingTime(e, 'tuesday')}
+            type="number"
+            defaultValue="8"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+          <TextField
+            id="standard-number"
+            label="Wednesday"
+            value={this.state.workTimeWed}
+            onChange={e => this.onChangeWorkingTime(e, 'wednesday')}
+            type="number"
+            defaultValue="8"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+          <TextField
+            id="standard-number"
+            label="Thursday"
+            value={this.state.workTimeThu}
+            onChange={e => this.onChangeWorkingTime(e, 'thursday')}
+            type="number"
+            defaultValue="8"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{
+              step: 0.1, // 5 min
+            }}
+            margin="normal"
+          />
+          <TextField
+            id="time"
+            label="Friday"
+            type="time"
+            defaultValue="08:00"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{
+              step: 60, // 5 min
+            }}
+          />
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          // className={classes.button}
+        >
+          {'적용'}
+        </Button>
+      </>
+    )
+  }
+} 
 
 export default WorkingTimePage;
