@@ -15,14 +15,20 @@ interface IState {
   workTimeTue: number,
   workTimeWed: number,
   workTimeThu: number,
+  comeToOfficeTimeFri: string,
+  canOutOfOfficeTime: string,
+  remainTime: string,
 }
 
 class WorkingTimePage extends React.Component<IProps, IState> {
   public state: IState = {
+    canOutOfOfficeTime: "Not yet...",
+    comeToOfficeTimeFri: "08:00",
+    remainTime: "I don't know yet...",
     workTimeMon: 8,
+    workTimeThu: 8,
     workTimeTue: 8,
     workTimeWed: 8,
-    workTimeThu: 8,
   }
 
   public onChangeWorkingTime = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, container: string): void => {
@@ -54,14 +60,43 @@ class WorkingTimePage extends React.Component<IProps, IState> {
       default:
         break;
     }
-    
+  }
+
+  public onApplyClick = () => {
+    const {
+      workTimeMon,
+      workTimeTue,
+      workTimeWed,
+      workTimeThu,
+      comeToOfficeTimeFri,
+    } = this.state;
+
+    console.log(workTimeMon, workTimeTue, workTimeWed, workTimeThu, comeToOfficeTimeFri);
+  }
+
+  public onChangeComeToOfficeTime = (e: any) => {
+    this.setState({
+      comeToOfficeTimeFri: e.currentTarget.value,
+    });
   }
   
   public render() {
     return (
       <>
-        <span><h2 style={{display: 'inline-block'}}>퇴근가능시간은?</h2></span><span><h3 style={{display: 'inline-block', color: 'red'}}>17:30</h3></span>
-        <h3>남은시간(8:00)</h3>
+        <span>
+          <h2 style={{display: 'inline-block'}}>
+            {'퇴근가능시간은?'}
+          </h2>
+        </span>
+        <span>
+          <h3 style={{display: 'inline-block', color: 'red'}}>
+            {this.state.canOutOfOfficeTime}
+          </h3>
+        </span>
+        <h3>
+          {'남은시간'}
+          {this.state.remainTime}
+        </h3>
         <div style={{display: 'flex', 'flex-direction': 'column'}}>
           <TextField
             id="standard-number"
@@ -70,7 +105,6 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             onChange={e => this.onChangeWorkingTime(e, 'monday')}
             type="number"
             defaultValue="8"
-            // className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
@@ -83,7 +117,6 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             onChange={e => this.onChangeWorkingTime(e, 'tuesday')}
             type="number"
             defaultValue="8"
-            // className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
@@ -96,7 +129,6 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             onChange={e => this.onChangeWorkingTime(e, 'wednesday')}
             type="number"
             defaultValue="8"
-            // className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
@@ -109,7 +141,6 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             onChange={e => this.onChangeWorkingTime(e, 'thursday')}
             type="number"
             defaultValue="8"
-            // className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
@@ -123,22 +154,23 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             label="Friday"
             type="time"
             defaultValue="08:00"
-            // className={classes.textField}
+            onChange={this.onChangeComeToOfficeTime}
             InputLabelProps={{
               shrink: true,
             }}
             inputProps={{
-              step: 60, // 5 min
+              step: 60, // 1 min
             }}
+            value={this.state.comeToOfficeTimeFri}
           />
-        </div>
-        <Button
+          <Button
           variant="contained"
           color="primary"
-          // className={classes.button}
+          onClick={this.onApplyClick}
         >
           {'적용'}
         </Button>
+        </div>
       </>
     )
   }
