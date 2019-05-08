@@ -18,6 +18,7 @@ interface IState {
   comeToOfficeTimeFri: string,
   canOutOfOfficeTime: string,
   remainTime: string,
+  totalWorkingTime: string,
 }
 
 class WorkingTimePage extends React.Component<IProps, IState> {
@@ -25,6 +26,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     canOutOfOfficeTime: "Not yet...",
     comeToOfficeTimeFri: "08:00",
     remainTime: "I don't know yet...",
+    totalWorkingTime: "00:00",
     workTimeMon: 8,
     workTimeThu: 8,
     workTimeTue: 8,
@@ -71,14 +73,57 @@ class WorkingTimePage extends React.Component<IProps, IState> {
       comeToOfficeTimeFri,
     } = this.state;
 
-    console.log(workTimeMon, workTimeTue, workTimeWed, workTimeThu, comeToOfficeTimeFri);
+    // 총 근무시간 계산
+    const workHourWeekToMin = (Math.floor(workTimeMon) + Math.floor(workTimeTue) + Math.floor(workTimeWed) + Math.floor(workTimeThu)) * 60;
+    const workMinWeek = Math.round(
+      this.toUnderPointNumber(workTimeMon)
+      + this.toUnderPointNumber(workTimeTue)
+      + this.toUnderPointNumber(workTimeWed)
+      + this.toUnderPointNumber(workTimeThu)
+      + workHourWeekToMin);
+
+    const doneTime = this.toMinutesToHourMin(workMinWeek);
+
+    // 남은 시간 계산
+    const totalDate = new Date(0, 0, 1, doneTime.hour, doneTime.min, 0);
+    const fourtyHour = new Date(0, 0, 1, 40, 0, 0);
+    const remainTotalMin = (fourtyHour.getTime() - totalDate.getTime()) / 1000 / 60;
+    const remainTime = this.toMinutesToHourMin(remainTotalMin);
+
+    let additionalMinutes = 30;
+    if (remainTotalMin < 480) { // 8시간 미만
+      additionalMinutes = 30;
+    } else if (remainTotalMin < 720) {  // 8시간이상~12시간미만
+      additionalMinutes = 60;
+    } else if (remainTotalMin < 960) {  // 12시간이상~16시간미만
+      additionalMinutes = 90;
+    }
+
+    // const realRemainMinutes = this.toMinutesToHourMin(remainTotalMin + additionalMinutes);
+    const officeTimeFriday = comeToOfficeTimeFri.split(':');
+    const comeToOfficeDate = new Date(0, 0, 2, Number(officeTimeFriday[0]), Number(officeTimeFriday[1]), 0);
+    // const remainDate = new Date(0, 0, 0, realRemainMinutes.hour, realRemainMinutes.min, 0);
+    comeToOfficeDate.setMinutes(comeToOfficeDate.getMinutes() + remainTotalMin + additionalMinutes);
+    // const canOutOfOfficeDate = this.toMinutesToHourMin(comeToOfficeDate.getTime() / 1000 / 60);
+    this.setState({
+      totalWorkingTime: `${doneTime.hour}:${doneTime.min}`,
+      remainTime: `${remainTime.hour}:${remainTime.min}`,
+      // canOutOfOfficeTime: `${canOutOfOfficeDate.hour}:${canOutOfOfficeDate.min}`
+    })
   }
+
+  public toMinutesToHourMin = (totalMinutes: number) => ({
+    hour: Math.floor(totalMinutes / 60),
+    min: totalMinutes % 60,
+  })
 
   public onChangeComeToOfficeTime = (e: any) => {
     this.setState({
       comeToOfficeTimeFri: e.currentTarget.value,
     });
   }
+
+  public toUnderPointNumber = (time: number) => (time - Math.floor(time)) * 100;
   
   public render() {
     return (
@@ -96,6 +141,10 @@ class WorkingTimePage extends React.Component<IProps, IState> {
         <h3>
           {'남은시간'}
           {this.state.remainTime}
+        </h3>
+        <h3>
+          {'총 근무 시간'}
+          {this.state.totalWorkingTime}
         </h3>
         <div style={{display: 'flex', 'flex-direction': 'column'}}>
           <TextField
