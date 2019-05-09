@@ -5,7 +5,11 @@ import {
   Switch,
 } from 'react-router-dom';
 import Header from './components/Header/Header';
-import { ShuttleBusPage, WorkingTimePage } from './pages';
+import {
+  ShuttleBusPage,
+  WorkingTimePage,
+  FoodistPage,
+} from './pages';
 
 class App extends React.Component {
   public render() {
@@ -13,9 +17,10 @@ class App extends React.Component {
       <Router>
         <Header />
         <Switch>
-          <Route exact={true} path="/" component={WorkingTimePage} />
           <Route path="/WorkingTime" component={WorkingTimePage} />
+          <Route path="/Foodist" component={FoodistPage} />
           <Route path="/ShuttleBus" component={ShuttleBusPage} />
+          <Route path="/" component={WorkingTimePage} />
         </Switch>
       </Router>
       
