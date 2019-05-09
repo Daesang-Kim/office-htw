@@ -108,7 +108,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     this.setState({
       totalWorkingTime: `${doneTime.hour}:${doneTime.min}`,
       remainTime: `${remainTime.hour}:${remainTime.min}`,
-      // canOutOfOfficeTime: `${canOutOfOfficeDate.hour}:${canOutOfOfficeDate.min}`
+      canOutOfOfficeTime: `${comeToOfficeDate.getHours()}:${comeToOfficeDate.getMinutes()}`
     })
   }
 
@@ -157,6 +157,9 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{
+              step: 0.01, // 1 min
+            }}
             margin="normal"
           />
           <TextField
@@ -169,6 +172,9 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{
+              step: 0.01, // 1 min
+            }}
             margin="normal"
           />
           <TextField
@@ -180,6 +186,9 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             defaultValue="8"
             InputLabelProps={{
               shrink: true,
+            }}
+            inputProps={{
+              step: 0.01, // 1 min
             }}
             margin="normal"
           />
@@ -194,7 +203,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
               shrink: true,
             }}
             inputProps={{
-              step: 0.1, // 5 min
+              step: 0.01, // 1 min
             }}
             margin="normal"
           />
