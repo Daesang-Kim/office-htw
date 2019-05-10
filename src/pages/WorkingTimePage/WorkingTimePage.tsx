@@ -34,7 +34,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
   }
 
   public onChangeWorkingTime = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, container: string): void => {
-    const numberValue = Number.parseFloat(e.currentTarget.value);
+    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
     if (Number.isNaN(numberValue)) {
       return;
     }
