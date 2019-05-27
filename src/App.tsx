@@ -17,10 +17,10 @@ class App extends React.Component {
       <Router>
         <Header />
         <Switch>
-          <Route path="/WorkingTime" component={WorkingTimePage} />
           <Route path="/Foodist" component={FoodistPage} />
+          <Route path="/WorkingTime" component={WorkingTimePage} />
           <Route path="/ShuttleBus" component={ShuttleBusPage} />
-          <Route path="/" component={WorkingTimePage} />
+          <Route path="/" component={FoodistPage} />
         </Switch>
       </Router>
       
