@@ -33,6 +33,46 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     workTimeWed: 8,
   }
 
+  public onChangeWorkingTimeMonday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
+    if (Number.isNaN(numberValue)) {
+      return;
+    }
+    this.setState({
+      workTimeMon: numberValue,
+    });
+  }
+  
+  public onChangeWorkingTimeThusday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
+    if (Number.isNaN(numberValue)) {
+      return;
+    }
+    this.setState({
+      workTimeTue: numberValue,
+    });
+  }
+
+  public onChangeWorkingTimeWednesday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
+    if (Number.isNaN(numberValue)) {
+      return;
+    }
+    this.setState({
+      workTimeWed: numberValue,
+    });
+  }
+
+  public onChangeWorkingTimeThursday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
+    if (Number.isNaN(numberValue)) {
+      return;
+    }
+    this.setState({
+      workTimeThu: numberValue,
+    });
+  }
+
   public onChangeWorkingTime = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, container: string): void => {
     const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
     if (Number.isNaN(numberValue)) {
@@ -106,9 +146,9 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     comeToOfficeDate.setMinutes(comeToOfficeDate.getMinutes() + remainTotalMin + additionalMinutes);
     // const canOutOfOfficeDate = this.toMinutesToHourMin(comeToOfficeDate.getTime() / 1000 / 60);
     this.setState({
-      totalWorkingTime: `${doneTime.hour}:${doneTime.min}`,
+      canOutOfOfficeTime: `${comeToOfficeDate.getHours()}:${comeToOfficeDate.getMinutes()}`,
       remainTime: `${remainTime.hour}:${remainTime.min}`,
-      canOutOfOfficeTime: `${comeToOfficeDate.getHours()}:${comeToOfficeDate.getMinutes()}`
+      totalWorkingTime: `${doneTime.hour}:${doneTime.min}`,
     })
   }
 
@@ -146,12 +186,12 @@ class WorkingTimePage extends React.Component<IProps, IState> {
           {'총 근무 시간'}
           {this.state.totalWorkingTime}
         </h3>
-        <div style={{display: 'flex', 'flex-direction': 'column'}}>
+        <div style={{display: 'flex', ['flex-direction']: 'column'}}>
           <TextField
             id="standard-number"
             label="Monday"
             value={this.state.workTimeMon}
-            onChange={e => this.onChangeWorkingTime(e, 'monday')}
+            onChange={this.onChangeWorkingTimeMonday}
             type="number"
             defaultValue="8"
             InputLabelProps={{
@@ -166,7 +206,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             id="standard-number"
             label="Tuesday"
             value={this.state.workTimeTue}
-            onChange={e => this.onChangeWorkingTime(e, 'tuesday')}
+            onChange={this.onChangeWorkingTimeThusday}
             type="number"
             defaultValue="8"
             InputLabelProps={{
@@ -181,7 +221,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             id="standard-number"
             label="Wednesday"
             value={this.state.workTimeWed}
-            onChange={e => this.onChangeWorkingTime(e, 'wednesday')}
+            onChange={this.onChangeWorkingTimeWednesday}
             type="number"
             defaultValue="8"
             InputLabelProps={{
@@ -196,7 +236,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             id="standard-number"
             label="Thursday"
             value={this.state.workTimeThu}
-            onChange={e => this.onChangeWorkingTime(e, 'thursday')}
+            onChange={this.onChangeWorkingTimeThursday}
             type="number"
             defaultValue="8"
             InputLabelProps={{

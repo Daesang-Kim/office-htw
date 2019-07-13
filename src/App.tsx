@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import Header from './components/Header/Header';
 import {
+  FoodistPage,
   ShuttleBusPage,
   WorkingTimePage,
-  FoodistPage,
 } from './pages';
 
 class App extends React.Component {
