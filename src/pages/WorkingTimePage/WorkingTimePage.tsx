@@ -33,44 +33,46 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     workTimeWed: 8,
   }
 
-  public onChangeWorkingTimeMonday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
-    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
-    if (Number.isNaN(numberValue)) {
-      return;
+  public IsNumber = (value: string | number): boolean => {
+    if (typeof value === 'number' && !Number.isNaN(value)) {
+      return true;
     }
-    this.setState({
-      workTimeMon: numberValue,
-    });
+    if (value === '' || (typeof value === 'string' && Number.parseFloat(value))) {
+      return true;
+    }
+    return false;
+  }
+
+  public onChangeWorkingTimeMonday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+    if (this.IsNumber(e.currentTarget.value)) {
+      this.setState({
+        workTimeMon: Number.parseFloat(e.currentTarget.value),
+      });
+    }
   }
   
   public onChangeWorkingTimeThusday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
-    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
-    if (Number.isNaN(numberValue)) {
-      return;
+    if (this.IsNumber(e.currentTarget.value)) {
+      this.setState({
+        workTimeTue: Number.parseFloat(e.currentTarget.value),
+      });
     }
-    this.setState({
-      workTimeTue: numberValue,
-    });
   }
 
   public onChangeWorkingTimeWednesday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
-    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
-    if (Number.isNaN(numberValue)) {
-      return;
+    if (this.IsNumber(e.currentTarget.value)) {
+      this.setState({
+        workTimeWed: Number.parseFloat(e.currentTarget.value),
+      });
     }
-    this.setState({
-      workTimeWed: numberValue,
-    });
   }
 
   public onChangeWorkingTimeThursday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
-    const numberValue = e.currentTarget.value === ''? 0 : Number.parseFloat(e.currentTarget.value);
-    if (Number.isNaN(numberValue)) {
-      return;
+    if (this.IsNumber(e.currentTarget.value)) {
+      this.setState({
+        workTimeThu: Number.parseFloat(e.currentTarget.value),
+      });
     }
-    this.setState({
-      workTimeThu: numberValue,
-    });
   }
 
   public onChangeWorkingTime = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, container: string): void => {
@@ -104,6 +106,8 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     }
   }
 
+  public toNumber = (value: any) : number => Number.isNaN(value) ? 0 : value;
+
   public onApplyClick = () => {
     const {
       workTimeMon,
@@ -114,12 +118,16 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     } = this.state;
 
     // 총 근무시간 계산
-    const workHourWeekToMin = (Math.floor(workTimeMon) + Math.floor(workTimeTue) + Math.floor(workTimeWed) + Math.floor(workTimeThu)) * 60;
+    const workHourWeekToMin = (
+      Math.floor(this.toNumber(workTimeMon)) + 
+      Math.floor(this.toNumber(workTimeTue)) +
+      Math.floor(this.toNumber(workTimeWed)) +
+      Math.floor(this.toNumber(workTimeThu))) * 60;
     const workMinWeek = Math.round(
-      this.toUnderPointNumber(workTimeMon)
-      + this.toUnderPointNumber(workTimeTue)
-      + this.toUnderPointNumber(workTimeWed)
-      + this.toUnderPointNumber(workTimeThu)
+      this.toUnderPointNumber(this.toNumber(workTimeMon))
+      + this.toUnderPointNumber(this.toNumber(workTimeTue))
+      + this.toUnderPointNumber(this.toNumber(workTimeWed))
+      + this.toUnderPointNumber(this.toNumber(workTimeThu))
       + workHourWeekToMin);
 
     const doneTime = this.toMinutesToHourMin(workMinWeek);
@@ -127,8 +135,14 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     // 남은 시간 계산
     const totalDate = new Date(0, 0, 1, doneTime.hour, doneTime.min, 0);
     const fourtyHour = new Date(0, 0, 1, 40, 0, 0);
-    const remainTotalMin = (fourtyHour.getTime() - totalDate.getTime()) / 1000 / 60;
+    let remainTotalMin = (fourtyHour.getTime() - totalDate.getTime()) / 1000 / 60;
     const remainTime = this.toMinutesToHourMin(remainTotalMin);
+
+    if (remainTime.hour <= 4 && remainTime.min <= 0) {
+      remainTime.hour = 4;
+      remainTime.min = 0;
+      remainTotalMin = 240;
+    }
 
     let additionalMinutes = 30;
     if (remainTotalMin < 480) { // 8시간 미만
