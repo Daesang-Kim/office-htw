@@ -160,11 +160,13 @@ class WorkingTimePage extends React.Component<IProps, IState> {
     comeToOfficeDate.setMinutes(comeToOfficeDate.getMinutes() + remainTotalMin + additionalMinutes);
     // const canOutOfOfficeDate = this.toMinutesToHourMin(comeToOfficeDate.getTime() / 1000 / 60);
     this.setState({
-      canOutOfOfficeTime: `${comeToOfficeDate.getHours()}:${comeToOfficeDate.getMinutes()}`,
-      remainTime: `${remainTime.hour}:${remainTime.min}`,
-      totalWorkingTime: `${doneTime.hour}:${doneTime.min}`,
+      canOutOfOfficeTime: `${this.pad2(comeToOfficeDate.getHours())}:${this.pad2(comeToOfficeDate.getMinutes())}`,
+      remainTime: `${this.pad2(remainTime.hour)}:${this.pad2(remainTime.min)}`,
+      totalWorkingTime: `${this.pad2(doneTime.hour)}:${this.pad2(doneTime.min)}`,
     })
   }
+
+  public pad2 = (num: string | number) => (Number(num) < 10 ? '0' : '') + num;
 
   public toMinutesToHourMin = (totalMinutes: number) => ({
     hour: Math.floor(totalMinutes / 60),
