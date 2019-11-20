@@ -5,11 +5,13 @@
   "homepage": "http://daesang-kim.github.io/office-htw",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "@types/styled-components": "^4.4.0",
     "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts-ts": "3.1.0"
+    "react-scripts-ts": "3.1.0",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",

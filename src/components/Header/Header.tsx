@@ -10,8 +10,21 @@ import * as React from 'react';
 import {
   Link,
 } from 'react-router-dom';
+import styled from 'styled-components';
 import styles from './HeaderStyled';
 
+const StyledLink = styled(Link)`
+  margin: 5px;
+  text-decoration: none;
+  color: white;
+
+  &:visited, &:link {
+      text-decoration: none;
+  }
+  &:focus, &:hover, &:active {
+    color: red;
+  }
+`;
 interface IProps extends WithStyles<typeof styles>{
 
 }
@@ -23,11 +36,11 @@ const Header: React.SFC<IProps> = () => (
         <Typography variant="title" color="inherit">
           HTW
         </Typography>
-        <Link to="/Foodist" style={{margin: "5px"}}>메뉴</Link>
-        <Link to="/WorkingTime" style={{margin: "5px"}}>퇴능</Link>
-        <Link to="/NewWorkingTime" style={{margin: "5px"}}>Nu퇴능</Link>
-        <Link to="/ShuttleBus" style={{margin: "5px"}}>셔틀</Link>
-        <Link to="/Info" style={{margin: "5px"}}>정보</Link>
+        <StyledLink to="/Foodist">메뉴</StyledLink>
+        <StyledLink to="/WorkingTime">퇴능</StyledLink>
+        <StyledLink to="/NewWorkingTime">Nu퇴능</StyledLink>
+        <StyledLink to="/ShuttleBus">셔틀</StyledLink>
+        <StyledLink to="/Info">정보</StyledLink>
       </Toolbar>
     </AppBar>
   </Grid>
