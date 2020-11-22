@@ -7,13 +7,20 @@ import {
 import Header from './components/Header/Header';
 import {
   FoodistPage,
+  FoodistUploadPage,
   InfoPage,
   NewWorkingTimePage,
   ShuttleBusPage,
   WorkingTimePage,
 } from './pages';
+import {
+  initFirebase,
+} from './utils/fb';
 
 class App extends React.Component {
+  public componentDidMount() {
+    initFirebase();
+  }
   public render() {
     return (
       <Router>
@@ -24,6 +31,7 @@ class App extends React.Component {
           <Route path="/NewWorkingTime" component={NewWorkingTimePage} />
           <Route path="/ShuttleBus" component={ShuttleBusPage} />
           <Route path="/Info" component={InfoPage} />
+          <Route path="/FoodistUpload" component={FoodistUploadPage} />
           <Route path="/" component={FoodistPage} />
         </Switch>
       </Router>

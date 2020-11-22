@@ -40,6 +40,7 @@ const Header: React.SFC<IProps> = () => (
         <StyledLink to="/WorkingTime">퇴능</StyledLink>
         <StyledLink to="/NewWorkingTime">Nu퇴능</StyledLink>
         <StyledLink to="/ShuttleBus">셔틀</StyledLink>
+        <StyledLink to="/FoodistUpload">업로드</StyledLink>
         <StyledLink to="/Info">정보</StyledLink>
       </Toolbar>
     </AppBar>
