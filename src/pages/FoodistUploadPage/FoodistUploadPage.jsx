@@ -51,6 +51,7 @@ const FoodistUploadPage = () => {
       const database = firebase.database();
       database.ref('images/').update({
         imageSrc,
+        lastUpdate: new Date(),
       });
       setMessage('okay');
       handleClose();

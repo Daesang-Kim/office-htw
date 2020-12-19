@@ -7,6 +7,12 @@ const InfoPage = () => (
   <div>
     <hr />
     <UpdateDescription new>
+      {'2020.12.20'}<br />
+      {'- 마지막 업로드 시간을 저장'}<br />
+      {'- 업로드 시간을 보고 이번주 업데이트 여부를 판단 가능'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2020.11.27'}<br />
       {'- 아무나 업로드 하면 안되기 때문에, 패스워드 걸어둠'}<br />
       {'- 패스워드는 비밀이나, 소스보기로 찾을 수는 있음'}<br />
