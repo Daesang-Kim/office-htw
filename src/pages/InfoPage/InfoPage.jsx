@@ -7,6 +7,12 @@ const InfoPage = () => (
   <div>
     <hr />
     <UpdateDescription new>
+      {'2021.04.19'}<br />
+      {'- animal 페이지 추가'}<br />
+      {'- 동물 그림들 추가하려고 만들었는데, 지아 사진과 함께 올려버림.. (응?)'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2020.12.20'}<br />
       {'- 마지막 업로드 시간을 저장'}<br />
       {'- 업로드 시간을 보고 이번주 업데이트 여부를 판단 가능'}<br />

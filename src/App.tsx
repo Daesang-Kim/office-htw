@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Header from './components/Header/Header';
 import {
+  AnimalsPage,
   FoodistPage,
   FoodistUploadPage,
   InfoPage,
@@ -32,6 +33,7 @@ class App extends React.Component {
           <Route path="/ShuttleBus" component={ShuttleBusPage} />
           <Route path="/Info" component={InfoPage} />
           <Route path="/FoodistUpload" component={FoodistUploadPage} />
+          <Route path="/Animals" component={AnimalsPage} />
           <Route path="/" component={FoodistPage} />
         </Switch>
       </Router>

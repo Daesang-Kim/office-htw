@@ -42,6 +42,7 @@ const Header: React.SFC<IProps> = () => (
         <StyledLink to="/ShuttleBus">셔틀</StyledLink>
         <StyledLink to="/FoodistUpload">업로드</StyledLink>
         <StyledLink to="/Info">정보</StyledLink>
+        <StyledLink to="/Animals">동물들</StyledLink>
       </Toolbar>
     </AppBar>
   </Grid>
