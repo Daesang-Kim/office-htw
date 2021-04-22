@@ -7,6 +7,13 @@ const InfoPage = () => (
   <div>
     <hr />
     <UpdateDescription new>
+      {'2021.04.22'}<br />
+      {'- animal 페이지를 fun 페이지로 변경'}<br />
+      {'- Header 가 길어져 media query 적용 하여 font-size 조절 함'}<br />
+      {'- 이미지 접기/펼치기 기능 추가'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2021.04.19'}<br />
       {'- animal 페이지 추가'}<br />
       {'- 동물 그림들 추가하려고 만들었는데, 지아 사진과 함께 올려버림.. (응?)'}<br />

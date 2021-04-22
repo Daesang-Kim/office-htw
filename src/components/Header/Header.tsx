@@ -3,7 +3,6 @@ import {
   Grid,
   Toolbar,
   Typography,
-  WithStyles,
   withStyles,
 } from '@material-ui/core';
 import * as React from 'react';
@@ -15,6 +14,20 @@ import styles from './HeaderStyled';
 
 const StyledLink = styled(Link)`
   margin: 5px;
+
+  @media all and (max-width: 550px) {
+    font-size: 14px
+  }
+  @media all and (max-width: 500px) {
+    font-size: 12px
+  }
+  @media all and (max-width: 450px) {
+    font-size: 10px
+  }
+  @media all and (max-width: 400px) {
+    font-size: 10px;
+    margin: 1px;
+  }
   text-decoration: none;
   color: white;
 
@@ -25,11 +38,8 @@ const StyledLink = styled(Link)`
     color: red;
   }
 `;
-interface IProps extends WithStyles<typeof styles>{
 
-}
-
-const Header: React.SFC<IProps> = () => (
+const Header = () => (
   <Grid container={true}>
     <AppBar position="static">
       <Toolbar>
@@ -42,7 +52,7 @@ const Header: React.SFC<IProps> = () => (
         <StyledLink to="/ShuttleBus">셔틀</StyledLink>
         <StyledLink to="/FoodistUpload">업로드</StyledLink>
         <StyledLink to="/Info">정보</StyledLink>
-        <StyledLink to="/Animals">동물들</StyledLink>
+        <StyledLink to="/Animals">fun</StyledLink>
       </Toolbar>
     </AppBar>
   </Grid>
