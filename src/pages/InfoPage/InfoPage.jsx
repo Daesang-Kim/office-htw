@@ -7,6 +7,13 @@ const InfoPage = () => (
   <div>
     <hr />
     <UpdateDescription new>
+      {'2021.05.04'}<br />
+      {'- fun 페이지'}<br />
+      {'- 한줄 평 추가'}<br />
+      {'- DB 연동 완료'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2021.04.22'}<br />
       {'- animal 페이지를 fun 페이지로 변경'}<br />
       {'- Header 가 길어져 media query 적용 하여 font-size 조절 함'}<br />
