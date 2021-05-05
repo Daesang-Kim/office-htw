@@ -156,12 +156,12 @@ class NewWorkingTimePage extends React.Component<IProps, IState> {
             value={this.state.comeToOfficeTimeFri}
           />
           <Button
-          variant="contained"
-          color="primary"
-          onClick={this.onApplyClick}
-        >
-          {'적용'}
-        </Button>
+            variant="contained"
+            color="default"
+            onClick={this.onApplyClick}
+          >
+            {'적용'}
+          </Button>
         </div>
       </>
     )

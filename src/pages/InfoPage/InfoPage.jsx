@@ -11,6 +11,8 @@ const InfoPage = () => (
       {'- 하단 메뉴로 UX를 변경'}<br />
       {'- 전체 SW Warning 수정'}<br />
       {'- 한줄 평 최신 글이 가장 위로 보이도록 수정'}<br />
+      {'- 스크롤 시 하단 메뉴때문에 내용이 가려지는 문제 수정'}<br />
+      {'- 전체 스타일 수정'}<br />
     </UpdateDescription>
     <hr />
     <UpdateDescription>

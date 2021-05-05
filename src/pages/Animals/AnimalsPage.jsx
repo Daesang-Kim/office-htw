@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import * as firebase from 'firebase';
+import {
+  Button,
+} from '@material-ui/core';
 import i20210411_074214 from '../../res/images/20210411_074214.jpg';
 import i20210415_182520 from '../../res/images/20210415_182520.jpg';
 import i20210417_200729 from '../../res/images/20210417_200729.jpg';
@@ -53,7 +56,7 @@ const AnimalsPage = () => {
         <div>{'한줄평: '}</div>
         <div style={{ display: 'flex', flex: 1 }}>
           <input onChange={onTextChange} onKeyPress={onTextKeyPress} value={text} style={{ width: '100%' }} type="text" />
-          <button onClick={onOKClick}>OK</button>
+          <Button variant="contained" color="default" onClick={onOKClick}>OK</Button>
         </div>
       </div>
       <div>
@@ -75,9 +78,9 @@ const AnimalsPage = () => {
       </div>
 
       <div>
-        <button onClick={onShowButtonClick} style={{ width: '100%'}}>
+        <Button variant="contained" color="default" onClick={onShowButtonClick} style={{ width: '100%'}}>
           { show ? "접기" : "펼치기"}
-        </button>
+        </Button>
       </div>
       { show && (
         <div>

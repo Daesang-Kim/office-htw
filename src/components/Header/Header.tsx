@@ -10,9 +10,9 @@ import styles from './HeaderStyled';
 
 const Header = () => (
   <Grid container={true}>
-    <AppBar position="static">
+    <AppBar position="static" color="default">
       <Toolbar>
-        <Typography variant="title" color="inherit">
+        <Typography variant="title" color="default">
           HTW
         </Typography>
       </Toolbar>
