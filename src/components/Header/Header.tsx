@@ -6,38 +6,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import * as React from 'react';
-import {
-  Link,
-} from 'react-router-dom';
-import styled from 'styled-components';
 import styles from './HeaderStyled';
-
-const StyledLink = styled(Link)`
-  margin: 5px;
-
-  @media all and (max-width: 550px) {
-    font-size: 14px
-  }
-  @media all and (max-width: 500px) {
-    font-size: 12px
-  }
-  @media all and (max-width: 450px) {
-    font-size: 10px
-  }
-  @media all and (max-width: 400px) {
-    font-size: 10px;
-    margin: 1px;
-  }
-  text-decoration: none;
-  color: white;
-
-  &:visited, &:link {
-      text-decoration: none;
-  }
-  &:focus, &:hover, &:active {
-    color: red;
-  }
-`;
 
 const Header = () => (
   <Grid container={true}>
@@ -46,13 +15,6 @@ const Header = () => (
         <Typography variant="title" color="inherit">
           HTW
         </Typography>
-        <StyledLink to="/Foodist">메뉴</StyledLink>
-        <StyledLink to="/WorkingTime">퇴능</StyledLink>
-        <StyledLink to="/NewWorkingTime">Nu퇴능</StyledLink>
-        <StyledLink to="/ShuttleBus">셔틀</StyledLink>
-        <StyledLink to="/FoodistUpload">업로드</StyledLink>
-        <StyledLink to="/Info">정보</StyledLink>
-        <StyledLink to="/Animals">fun</StyledLink>
       </Toolbar>
     </AppBar>
   </Grid>

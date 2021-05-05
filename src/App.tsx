@@ -4,7 +4,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Header from './components/Header/Header';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import {
   AnimalsPage,
   FoodistPage,
@@ -26,16 +27,19 @@ class App extends React.Component {
     return (
       <Router>
         <Header />
-        <Switch>
-          <Route path="/Foodist" component={FoodistPage} />
-          <Route path="/WorkingTime" component={WorkingTimePage} />
-          <Route path="/NewWorkingTime" component={NewWorkingTimePage} />
-          <Route path="/ShuttleBus" component={ShuttleBusPage} />
-          <Route path="/Info" component={InfoPage} />
-          <Route path="/FoodistUpload" component={FoodistUploadPage} />
-          <Route path="/Animals" component={AnimalsPage} />
-          <Route path="/" component={FoodistPage} />
-        </Switch>
+        <div style={{ height: 'calc(100% + 56px)'}}>
+          <Switch>
+            <Route path="/Foodist" component={FoodistPage} />
+            <Route path="/WorkingTime" component={WorkingTimePage} />
+            <Route path="/NewWorkingTime" component={NewWorkingTimePage} />
+            <Route path="/ShuttleBus" component={ShuttleBusPage} />
+            <Route path="/Info" component={InfoPage} />
+            <Route path="/FoodistUpload" component={FoodistUploadPage} />
+            <Route path="/Animals" component={AnimalsPage} />
+            <Route path="/" component={FoodistPage} />
+          </Switch>
+        </div>
+        <Footer />
       </Router>
       
     );
