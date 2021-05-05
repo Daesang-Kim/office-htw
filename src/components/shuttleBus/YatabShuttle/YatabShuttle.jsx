@@ -1,7 +1,7 @@
 import * as React from 'react';
 const colSpan = 2;
 const YatabShuttle = () => (
-  <div style={{ display: 'flex', ['flex-direction']: 'column'}}>
+  <div style={{ display: 'flex', flexDirection: 'column'}}>
     <table style={{
       border: '1px solid',
     }}>

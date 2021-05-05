@@ -202,14 +202,14 @@ class WorkingTimePage extends React.Component<IProps, IState> {
           {'총 근무 시간'}
           {this.state.totalWorkingTime}
         </h3>
-        <div style={{display: 'flex', ['flex-direction']: 'column'}}>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
           <TextField
             id="standard-number"
             label="Monday"
             value={this.state.workTimeMon}
             onChange={this.onChangeWorkingTimeMonday}
             type="number"
-            defaultValue="8"
+            // defaultValue="8"
             InputLabelProps={{
               shrink: true,
             }}
@@ -224,7 +224,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             value={this.state.workTimeTue}
             onChange={this.onChangeWorkingTimeThusday}
             type="number"
-            defaultValue="8"
+            // defaultValue="8"
             InputLabelProps={{
               shrink: true,
             }}
@@ -239,7 +239,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             value={this.state.workTimeWed}
             onChange={this.onChangeWorkingTimeWednesday}
             type="number"
-            defaultValue="8"
+            // defaultValue="8"
             InputLabelProps={{
               shrink: true,
             }}
@@ -254,7 +254,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             value={this.state.workTimeThu}
             onChange={this.onChangeWorkingTimeThursday}
             type="number"
-            defaultValue="8"
+            // defaultValue="8"
             InputLabelProps={{
               shrink: true,
             }}
@@ -267,7 +267,7 @@ class WorkingTimePage extends React.Component<IProps, IState> {
             id="time"
             label="Friday"
             type="time"
-            defaultValue="08:00"
+            // defaultValue="08:00"
             onChange={this.onChangeComeToOfficeTime}
             InputLabelProps={{
               shrink: true,

@@ -125,14 +125,14 @@ class NewWorkingTimePage extends React.Component<IProps, IState> {
           {'남은시간'}
           {this.state.remainTime}
         </h3>
-        <div style={{display: 'flex', ['flex-direction']: 'column'}}>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
           <TextField
             id="standard-number"
             label="월~목 근무시간"
             value={this.state.workTime}
             onChange={this.onChangeWorkingTime}
             type="number"
-            defaultValue="8"
+            // defaultValue={8}
             InputLabelProps={{
               shrink: true,
             }}
@@ -145,7 +145,7 @@ class NewWorkingTimePage extends React.Component<IProps, IState> {
             id="time"
             label="Friday 출근시간"
             type="time"
-            defaultValue="08:00"
+            // defaultValue="08:00"
             onChange={this.onChangeComeToOfficeTime}
             InputLabelProps={{
               shrink: true,

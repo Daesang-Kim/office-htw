@@ -1,7 +1,7 @@
 import * as React from 'react';
 const colSpan = 3;
 const SeohyunShuttle = () => (
-  <div style={{display: 'flex', ['flex-direction']: 'column'}}>
+  <div style={{display: 'flex', 'flexDirection': 'column'}}>
     <table style={{border: '1px solid'}}>
       <tr>
         <td style={{['text-align']: 'center'}} colSpan={colSpan}>{'서현 출근 버스'}</td>
