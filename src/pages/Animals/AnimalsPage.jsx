@@ -69,8 +69,8 @@ const AnimalsPage = () => {
                   <div>{visitorLog[key]}</div>
                   <div style={{ fontSize: '10px', color: 'gray'}}>{dateFormat}</div>
                 </div>
-            )})
-          })
+            )}).reverse()
+          }).reverse()
         )}
       </div>
 
