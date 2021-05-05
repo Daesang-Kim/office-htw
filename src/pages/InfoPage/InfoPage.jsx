@@ -7,6 +7,13 @@ const InfoPage = () => (
   <div>
     <hr />
     <UpdateDescription new>
+      {'2021.05.05'}<br />
+      {'- 하단 메뉴로 UX를 변경'}<br />
+      {'- 전체 SW Warning 수정'}<br />
+      {'- 한줄 평 최신 글이 가장 위로 보이도록 수정'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2021.05.04'}<br />
       {'- fun 페이지'}<br />
       {'- 한줄 평 추가'}<br />
