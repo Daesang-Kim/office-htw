@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { UploadStyled } from './FoodistUploadPageStyled';
 import { Input, Button } from '@material-ui/core';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
