@@ -10,16 +10,23 @@ import i20210418_135413 from '../../res/images/20210418_135413.jpg';
 import i20210418_135759 from '../../res/images/20210418_135759.jpg';
 import i20210418_210314 from '../../res/images/20210418_210314.jpg';
 
+const newsUri = 'v1/search/news.json';
+
 const AnimalsPage = () => {
   const [show, setShow] = useState(false);
+  const [newsShow, setNewsShow] = useState(false);
   const [text, setText] = useState('');
   const [visitorLogs, setVisitorLogs] = useState({});
   React.useEffect(() => {
     refreshVisitorLogDB();
+    loadNews();
   }, []);
 
   const onShowButtonClick = () => {
     setShow(!show);
+  }
+  const onNewsShowButtonClick = () => {
+    setNewsShow(!newsShow);
   }
   const onTextChange = e => {
     setText(e.target.value);
@@ -49,6 +56,25 @@ const AnimalsPage = () => {
       setVisitorLogs(visitLogs);
     })
   }
+  const loadNews = () => {
+    let options = { 
+      method: 'GET',
+      headers: {
+        Accept: '*/*',
+        'Content-Type': 'application/json',
+        'X-Naver-Client-Id': 'KL_voGl4mUMj5fcePnc3',
+        'X-Naver-Client-Secret': 'IaPXGZ_j9D',
+      },
+    }
+    const data = getNewsAPI(newsUri, options);
+  }
+
+  const getNewsAPI = async (url, options) => {
+    const response = await fetch(url, options);
+    const json = await response.json();
+    return json;
+  }
+
   return (
     <div>
       <div>{'앱이 마음에 드십니까?'}</div>
@@ -76,6 +102,16 @@ const AnimalsPage = () => {
           }).reverse()
         )}
       </div>
+      <div>
+        <Button variant="outlined" color="default" onClick={onNewsShowButtonClick} style={{ width: '100%'}}>
+          { newsShow ? "접기" : "펼치기"}
+        </Button>
+      </div>
+      { newsShow && (
+        <div>
+
+        </div>
+      )}
 
       <div>
         <Button variant="contained" color="default" onClick={onShowButtonClick} style={{ width: '100%'}}>
