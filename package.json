@@ -2,7 +2,7 @@
   "name": "office-htw",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://daesang-kim.github.io/office-htw",
+  "homepage": "https://office-htw.web.app/",
   "proxy": "https://openapi.naver.com/",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
