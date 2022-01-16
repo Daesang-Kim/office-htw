@@ -4,11 +4,11 @@ var xhr = new XMLHttpRequest();
 
 const getNewsAPI = async (url, options) => {
   xhr.onreadystatechange = function() {
-    console.log("State: " + this.readyState);
+    // console.log("State: " + this.readyState);
     
     if (this.readyState === 4) {
-      console.log("Complete.\nBody length: " + this.responseText.length);
-      console.log("Body:\n" + this.responseText);
+      // console.log("Complete.\nBody length: " + this.responseText.length);
+      // console.log("Body:\n" + this.responseText);
     }
   };
   xhr.open("GET", url);
