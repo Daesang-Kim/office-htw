@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { UploadStyled } from './FoodistUploadPageStyled';
 import { Input, Button } from '@material-ui/core';
-import firebase from 'firebase/app';
+import { getDatabase, onValue, ref, set, update } from "firebase/database";
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -23,9 +23,11 @@ const FoodistUploadPage = () => {
   };
 
   React.useEffect(() => {
-    const database = firebase.database();
-    database.ref('images/').once('value').then(function(snapshot){
+    const db = getDatabase();
+    const imageRef = ref(db, 'images/');
+    onValue(imageRef, snapshot => {
       const img = (snapshot.val() && snapshot.val().imageSrc) || '';
+      const lastUp = (snapshot.val() && snapshot.val().lastUpdate) || '';
       setImageSrc(img);
     })
   }, []);
@@ -48,11 +50,14 @@ const FoodistUploadPage = () => {
       handleClose();
     } else {
       // 이미지 저장
-      const database = firebase.database();
-      database.ref('images/').update({
-        imageSrc,
-        lastUpdate: new Date(),
-      });
+      const db = getDatabase();
+      const updates = {
+        ['images/']: {
+          imageSrc,
+          lastUpdate: new Date(),
+        },
+      };
+      update(ref(db), updates)
       setMessage('okay');
       handleClose();
     }

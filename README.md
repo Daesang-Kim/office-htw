@@ -17,3 +17,7 @@
 * server
   * `cd functions`
   * `npm run serve`
+
+## 개발환경에서 Functions 호출 및 실행 방법
+* https://firebase.google.com/docs/functions/local-emulator#unix
+* 키를 등록 해 줘야 함

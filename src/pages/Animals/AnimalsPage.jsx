@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import firebase from 'firebase/app';
+import { getDatabase, onValue, ref, update } from "firebase/database";
+import {
+  firebaseFunctions,
+} from '../../utils/fb';
 import {
   Button,
 } from '@material-ui/core';
-
-
-// const newsUri = 'https://openapi.naver.com/v1/search/news.json';
 
 const AnimalsPage = () => {
   const [show, setShow] = useState(false);
   const [newsShow, setNewsShow] = useState(false);
   const [text, setText] = useState('');
   const [visitorLogs, setVisitorLogs] = useState({});
+  const [newsData, setNewsData] = useState('initialing...');
   React.useEffect(() => {
     refreshVisitorLogDB();
     loadNews();
@@ -32,42 +33,54 @@ const AnimalsPage = () => {
     }
   }
   const onOKClick = () => {
-    const database = firebase.database();
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     const date = `${year}${month}${currentDate.getDate().toString().padStart(2, '0')}`
     const time = currentDate.valueOf();
-      database.ref(`visitorlog/${date}`).update({
+    const db = getDatabase();
+    const updates = {
+      [`visitorlog/${date}`]: {
         [time]: text,
-      });
+      }
+    }
+    update(ref(db), updates)
     setText('');
     refreshVisitorLogDB();
   }
   const refreshVisitorLogDB = () => {
-    const database = firebase.database();
-    database.ref('visitorlog/').once('value').then(snapshot => {
+    const db = getDatabase();
+    const visitorLogRef = ref(db, 'visitorlog/');
+    onValue(visitorLogRef, snapshot => {
       const visitLogs = snapshot.val() || {};
       setVisitorLogs(visitLogs);
     })
   }
   const loadNews = () => {
-    let options = { 
-      method: 'GET',
-      headers: {
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-        'X-Naver-Client-Id': 'KL_voGl4mUMj5fcePnc3',
-        'X-Naver-Client-Secret': 'IaPXGZ_j9D',
-      },
-    }
-    // const data = getNewsAPI(newsUri, options);
-  }
+    const helloWorld = firebaseFunctions('helloWorld');
+    if (helloWorld != null) {
+      helloWorld()
+        .then((result) => {
+          // Read result of the Cloud Function.
+          /** @type {any} */
+          // const data = result.data;
+          // console.log(result)
+          const jsonData = JSON.parse(result.data)
+          console.log(jsonData)
 
-  const getNewsAPI = async (url, options) => {
-    const response = await fetch(url, options);
-    const json = await response.json();
-    return json;
+          setNewsData(jsonData);
+          // console.log(JSON.parse(result.toString()))
+          // const sanitizedMessage = data.text;
+        })
+        .catch((error) => {
+          // Getting the Error details.
+          const code = error.code;
+          const message = error.message;
+          const details = error.details;
+          // ...
+          setNewsData(`${code} ${message} ${details}`);
+        });
+    }
   }
 
   return (
@@ -99,12 +112,18 @@ const AnimalsPage = () => {
       </div>
       <div>
         <Button variant="outlined" color="default" onClick={onNewsShowButtonClick} style={{ width: '100%'}}>
-          { newsShow ? "접기" : "펼치기"}
+          { newsData === 'initialing...' ? "로딩중" : newsShow ? "뉴스 접기" : "뉴스 펼치기"}
         </Button>
       </div>
       { newsShow && (
         <div>
-
+          { newsData.items.map(item => (
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <a href={item.link}>
+                <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
+              </a>
+            </div>)
+          )}
         </div>
       )}
 

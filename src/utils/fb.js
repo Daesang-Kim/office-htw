@@ -1,10 +1,13 @@
-import firebase from 'firebase/app';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics, logEvent } from 'firebase/analytics';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
-import "firebase/analytics";
+// import "firebase/analytics";
 // Add the Firebase products that you want to use
 // import "firebase/auth";
 // import "firebase/firestore";
-import "firebase/database";
+// import "firebase/database";
+// import { getFunctions } from 'firebase/functions';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -18,8 +21,19 @@ const firebaseConfig = {
   measurementId: "G-TMMQR2HL44"
 };
 
+let app = null;
+
 export const initFirebase = () => {
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+  app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics();
+  logEvent(analytics, 'notification_received');
+  return app;
 };
 
+export const firebaseFunctions = interfaceFunction => {
+  if (app != null) {
+    const functions = getFunctions(app)
+    return httpsCallable(functions, interfaceFunction);
+  }
+  return null;
+}
