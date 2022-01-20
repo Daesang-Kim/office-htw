@@ -66,7 +66,7 @@ const AnimalsPage = () => {
           // const data = result.data;
           // console.log(result)
           const jsonData = JSON.parse(result.data)
-          console.log(jsonData)
+          // console.log(jsonData)
 
           setNewsData(jsonData);
           // console.log(JSON.parse(result.toString()))
