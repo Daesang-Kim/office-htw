@@ -117,8 +117,8 @@ const AnimalsPage = () => {
       </div>
       { newsShow && (
         <div>
-          { newsData.items.map(item => (
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          { newsData.items.map((item, idx) => (
+            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between' }}>
               <a href={item.link}>
                 <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
               </a>
