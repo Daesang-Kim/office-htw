@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const FoodistUploadPage = () => {
-  const [imageSrc, setImageSrc] = React.useState('');
+  // const [imageSrc, setImageSrc] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState('');
 
@@ -28,7 +28,7 @@ const FoodistUploadPage = () => {
     onValue(imageRef, snapshot => {
       const img = (snapshot.val() && snapshot.val().imageSrc) || '';
       const lastUp = (snapshot.val() && snapshot.val().lastUpdate) || '';
-      setImageSrc(img);
+      // setImageSrc(img);
     })
   }, []);
 
@@ -38,7 +38,7 @@ const FoodistUploadPage = () => {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
-        setImageSrc(e.target.result);
+        // setImageSrc(e.target.result);
       };
       reader.readAsDataURL(input.files[0]);
     }
@@ -68,7 +68,7 @@ const FoodistUploadPage = () => {
       <Input type="file" onChange={onFileChange}>클릭</Input>
       <Button onClick={handleClickOpen}>Submit</Button>
       <div style={{ color: 'red' }}>{message}</div>
-      <img style={{ width: '100%' }} src={imageSrc} />
+
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Warning</DialogTitle>
         <DialogContent>
