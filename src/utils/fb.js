@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, logEvent } from 'firebase/analytics';
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { getFunctions, httpsCallable, connectFunctionsEmulator } from 'firebase/functions';
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
 // import "firebase/analytics";
 // Add the Firebase products that you want to use
@@ -33,6 +33,9 @@ export const initFirebase = () => {
 export const firebaseFunctions = interfaceFunction => {
   if (app != null) {
     const functions = getFunctions(app)
+    if(process.env.NODE_ENV === 'development') {
+      connectFunctionsEmulator(functions, "localhost", 5001);
+    }
     return httpsCallable(functions, interfaceFunction);
   }
   return null;
