@@ -1,48 +1,88 @@
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import * as React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom';
-import Footer from './components/Footer';
+// import NewsIcon from './res/icons/news.svg';
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Switch,
+// } from 'react-router-dom';
+// import Footer from './components/Footer';
 import Header from './components/Header';
 import {
-  AnimalsPage,
   FoodistPage,
-  FoodistUploadPage,
-  InfoPage,
-  NewWorkingTimePage,
-  ShuttleBusPage,
+  //   FoodistUploadPage,
+  // InfoPage,
+  NewsPage,
+  //   NewWorkingTimePage,
+  //   ShuttleBusPage,
+  VisitorPage,
   WorkingTimePage,
 } from './pages';
 import {
   initFirebase,
 } from './utils/fb';
 
-class App extends React.Component {
-  public componentDidMount() {
+const App = () => {
+  const [value, setValue] = React.useState(0)
+  const [init, setInit] = React.useState(false)
+
+  React.useEffect(() => {
     initFirebase();
+    setInit(true)
+  }, [])
+
+  const onNavigationChange = (event: any, newValue: number) => {
+    setValue(newValue);
   }
-  public render() {
-    return (
-      <Router>
+
+  return (
+    // <Router>
+    //   
+    //   <Switch>
+    //     <Route path="/Main" compoonent={NewsPage} />
+    //     <Route path="/Foodist" component={FoodistPage} />
+    //     <Route path="/WorkingTime" component={WorkingTimePage} />
+    //     <Route path="/NewWorkingTime" component={NewWorkingTimePage} />
+    //     <Route path="/ShuttleBus" component={ShuttleBusPage} />
+    //     <Route path="/Info" component={InfoPage} />
+    //     <Route path="/FoodistUpload" component={FoodistUploadPage} />
+    //     <Route path="/Animals" component={AnimalsPage} />
+    //     <Route path="/" component={NewsPage} />
+    //   </Switch>
+    //   <div style={{ height: '56px'}} />
+    //   <Footer />
+    // </Router>
+    <>
+      <div>
         <Header />
-        <Switch>
-          <Route path="/Foodist" component={FoodistPage} />
-          <Route path="/WorkingTime" component={WorkingTimePage} />
-          <Route path="/NewWorkingTime" component={NewWorkingTimePage} />
-          <Route path="/ShuttleBus" component={ShuttleBusPage} />
-          <Route path="/Info" component={InfoPage} />
-          <Route path="/FoodistUpload" component={FoodistUploadPage} />
-          <Route path="/Animals" component={AnimalsPage} />
-          <Route path="/" component={FoodistPage} />
-        </Switch>
-        <div style={{ height: '56px'}} />
-        <Footer />
-      </Router>
-      
-    );
-  }
+        {init && value === 0 && (
+            <NewsPage />
+        )}
+        {init && value === 1 && (
+            <FoodistPage />
+        )}
+        {init && value === 2 && (
+            <WorkingTimePage />
+        )}
+        {init && value === 3 && (
+            <VisitorPage />
+        )}
+      </div>
+      <div style={{ position: 'fixed', left: 0, right: 0, bottom: 0}}>
+        <BottomNavigation
+          showLabels={true}
+          value={value}
+          onChange={onNavigationChange}
+        >
+          <BottomNavigationAction label="소식" icon={<div />} />
+          <BottomNavigationAction label="식사" icon={<div />} />
+          <BottomNavigationAction label="퇴능" icon={<div />} />
+          <BottomNavigationAction label="설정" icon={<div />} />
+        </BottomNavigation>
+      </div>
+    </>
+  );
 }
 
 export default App;

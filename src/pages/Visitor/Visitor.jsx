@@ -8,22 +8,12 @@ import {
 } from '@material-ui/core';
 
 const AnimalsPage = () => {
-  const [show, setShow] = useState(false);
-  const [newsShow, setNewsShow] = useState(false);
   const [text, setText] = useState('');
   const [visitorLogs, setVisitorLogs] = useState({});
-  const [newsData, setNewsData] = useState('initialing...');
   React.useEffect(() => {
     refreshVisitorLogDB();
-    loadNews();
   }, []);
 
-  const onShowButtonClick = () => {
-    setShow(!show);
-  }
-  const onNewsShowButtonClick = () => {
-    setNewsShow(!newsShow);
-  }
   const onTextChange = e => {
     setText(e.target.value);
   }
@@ -56,36 +46,10 @@ const AnimalsPage = () => {
       setVisitorLogs(visitLogs);
     })
   }
-  const loadNews = () => {
-    const helloWorld = firebaseFunctions('helloWorld');
-    if (helloWorld != null) {
-      helloWorld()
-        .then((result) => {
-          // Read result of the Cloud Function.
-          /** @type {any} */
-          // const data = result.data;
-          // console.log(result)
-          const jsonData = JSON.parse(result.data)
-          // console.log(jsonData)
-
-          setNewsData(jsonData);
-          // console.log(JSON.parse(result.toString()))
-          // const sanitizedMessage = data.text;
-        })
-        .catch((error) => {
-          // Getting the Error details.
-          const code = error.code;
-          const message = error.message;
-          const details = error.details;
-          // ...
-          setNewsData(`${code} ${message} ${details}`);
-        });
-    }
-  }
-
+  
   return (
     <div>
-      <div>{'앱이 마음에 드십니까?'}</div>
+      <div>{'나도 한마디'}</div>
       <div style={{ display: 'flex' }}>
         <div>{'한줄평: '}</div>
         <div style={{ display: 'flex', flex: 1 }}>
@@ -110,32 +74,6 @@ const AnimalsPage = () => {
           }).reverse()
         )}
       </div>
-      <div>
-        <Button variant="outlined" color="default" onClick={onNewsShowButtonClick} style={{ width: '100%'}}>
-          { newsData === 'initialing...' ? "로딩중" : newsShow ? "뉴스 접기" : "뉴스 펼치기"}
-        </Button>
-      </div>
-      { newsShow && (
-        <div>
-          { newsData.items.map((item, idx) => (
-            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <a href={item.link}>
-                <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
-              </a>
-            </div>)
-          )}
-        </div>
-      )}
-
-      <div>
-        <Button variant="contained" color="default" onClick={onShowButtonClick} style={{ width: '100%'}}>
-          { show ? "접기" : "펼치기"}
-        </Button>
-      </div>
-      { show && (
-        <div>
-        </div>
-      )}
     </div>
   );
 }

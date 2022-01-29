@@ -1,15 +1,10 @@
 import {
   Button,
   TextField,
-  WithStyles,
+  // WithStyles,
 } from '@material-ui/core';
 import * as React from 'react';
-import styles from './WorkingTimePageStyled';
-
-interface IProps extends WithStyles<typeof styles> {
-  
-}
-
+// import styles from './WorkingTimePageStyled';
 interface IState {
   workTimeMon: number,
   workTimeTue: number,
@@ -21,7 +16,7 @@ interface IState {
   totalWorkingTime: string,
 }
 
-class WorkingTimePage extends React.Component<IProps, IState> {
+class WorkingTimePage extends React.Component<{}, IState> {
   public state: IState = {
     canOutOfOfficeTime: "Not yet...",
     comeToOfficeTimeFri: "08:00",
