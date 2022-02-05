@@ -1,7 +1,6 @@
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import * as React from 'react';
-// import NewsIcon from './res/icons/news.svg';
 // import {
 //   BrowserRouter as Router,
 //   Route,
@@ -19,6 +18,10 @@ import {
   VisitorPage,
   WorkingTimePage,
 } from './pages';
+import ClockIcon from './res/icons/clock.svg';
+import FoodIcon from './res/icons/food.svg';
+import NewsIcon from './res/icons/news.svg';
+import SettingsIcon from './res/icons/settings.svg';
 import {
   initFirebase,
 } from './utils/fb';
@@ -75,10 +78,10 @@ const App = () => {
           value={value}
           onChange={onNavigationChange}
         >
-          <BottomNavigationAction label="소식" icon={<div />} />
-          <BottomNavigationAction label="식사" icon={<div />} />
-          <BottomNavigationAction label="퇴능" icon={<div />} />
-          <BottomNavigationAction label="설정" icon={<div />} />
+          <BottomNavigationAction label="소식" icon={<img width="100%" height="100%" src={NewsIcon} />} />
+          <BottomNavigationAction label="식사" icon={<img width="100%" height="100%" src={FoodIcon} />} />
+          <BottomNavigationAction label="퇴능" icon={<img width="100%" height="100%" src={ClockIcon} />} />
+          <BottomNavigationAction label="설정" icon={<img width="100%" height="100%" src={SettingsIcon} />} />
         </BottomNavigation>
       </div>
     </>
