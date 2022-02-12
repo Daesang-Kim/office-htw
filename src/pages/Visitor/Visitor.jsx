@@ -6,6 +6,7 @@ import {
 import {
   Button,
 } from '@material-ui/core';
+import TextField from '@mui/material/TextField';
 
 const AnimalsPage = () => {
   const [text, setText] = useState('');
@@ -49,14 +50,17 @@ const AnimalsPage = () => {
   
   return (
     <div>
-      <div>{'나도 한마디'}</div>
       <div style={{ display: 'flex' }}>
-        <div>{'한줄평: '}</div>
         <div style={{ display: 'flex', flex: 1 }}>
-          <input onChange={onTextChange} onKeyPress={onTextKeyPress} value={text} style={{ width: '100%' }} type="text" />
+          <TextField fullWidth label="한줄평" id="one-line-comment" variant="standard"
+            onKeyPress={onTextKeyPress}
+            onChange={onTextChange}
+            value={text}
+          />
           <Button variant="contained" color="default" onClick={onOKClick}>OK</Button>
         </div>
       </div>
+      <hr />
       <div>
         {visitorLogs && Object.keys(visitorLogs).length > 0 && (
           Object.keys(visitorLogs).map(dateKey => {

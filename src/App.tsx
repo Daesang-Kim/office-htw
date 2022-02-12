@@ -15,7 +15,8 @@ import {
   NewsPage,
   //   NewWorkingTimePage,
   //   ShuttleBusPage,
-  VisitorPage,
+  // VisitorPage,
+  SettingsPage,
   WorkingTimePage,
 } from './pages';
 import ClockIcon from './res/icons/clock.svg';
@@ -57,7 +58,7 @@ const App = () => {
     //   <Footer />
     // </Router>
     <>
-      <div>
+      <div style={{ marginBottom: '60px' }}>
         <Header />
         {init && value === 0 && (
             <NewsPage />
@@ -69,7 +70,7 @@ const App = () => {
             <WorkingTimePage />
         )}
         {init && value === 3 && (
-            <VisitorPage />
+            <SettingsPage />
         )}
       </div>
       <div style={{ position: 'fixed', left: 0, right: 0, bottom: 0}}>
@@ -78,10 +79,10 @@ const App = () => {
           value={value}
           onChange={onNavigationChange}
         >
-          <BottomNavigationAction label="소식" icon={<img width="100%" height="100%" src={NewsIcon} />} />
-          <BottomNavigationAction label="식사" icon={<img width="100%" height="100%" src={FoodIcon} />} />
-          <BottomNavigationAction label="퇴능" icon={<img width="100%" height="100%" src={ClockIcon} />} />
-          <BottomNavigationAction label="설정" icon={<img width="100%" height="100%" src={SettingsIcon} />} />
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={NewsIcon} />} />
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={FoodIcon} />} />
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={ClockIcon} />} />
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={SettingsIcon} />} />
         </BottomNavigation>
       </div>
     </>

@@ -64,7 +64,6 @@ const FoodistUploadPage = () => {
   }
   return (
     <UploadStyled>
-      <label>Upload</label>
       <Input type="file" onChange={onFileChange}>클릭</Input>
       <Button onClick={handleClickOpen}>Submit</Button>
       <div style={{ color: 'red' }}>{message}</div>
