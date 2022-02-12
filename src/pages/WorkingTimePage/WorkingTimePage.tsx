@@ -1,15 +1,23 @@
 import {
-  Button,
+  // Button,
   TextField,
   // WithStyles,
 } from '@material-ui/core';
+import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import {
+  getAdditionalMinutes,
+  // toNumber,
+  minutesToHourMin,
+  pad2,
+  totalWorkMinWeek
+} from './calculation'
 // import styles from './WorkingTimePageStyled';
 interface IState {
-  workTimeMon: number,
-  workTimeTue: number,
-  workTimeWed: number,
-  workTimeThu: number,
+  workTimeMon: number | string,
+  workTimeTue: number | string,
+  workTimeWed: number | string,
+  workTimeThu: number | string,
   comeToOfficeTimeFri: string,
   canOutOfOfficeTime: string,
   remainTime: string,
@@ -18,14 +26,24 @@ interface IState {
 
 class WorkingTimePage extends React.Component<{}, IState> {
   public state: IState = {
-    canOutOfOfficeTime: "Not yet...",
+    canOutOfOfficeTime: "계산 전",
     comeToOfficeTimeFri: "08:00",
-    remainTime: "I don't know yet...",
+    remainTime: "계산 전",
     totalWorkingTime: "00:00",
     workTimeMon: 8,
     workTimeThu: 8,
     workTimeTue: 8,
     workTimeWed: 8,
+  }
+
+  public componentDidMount() {
+    this.onApplyClick()
+  }
+
+  public componentDidUpdate(prevProps: any, prevState: any) {
+    if (JSON.stringify(prevState) !== JSON.stringify(this.state)) {
+      this.onApplyClick()
+    }
   }
 
   public IsNumber = (value: string | number): boolean => {
@@ -40,32 +58,36 @@ class WorkingTimePage extends React.Component<{}, IState> {
 
   public onChangeWorkingTimeMonday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
     if (this.IsNumber(e.currentTarget.value)) {
+      const value = e.currentTarget.value === '' ? '' : Number.parseFloat(e.currentTarget.value)
       this.setState({
-        workTimeMon: Number.parseFloat(e.currentTarget.value),
+        workTimeMon: value,
       });
     }
   }
   
   public onChangeWorkingTimeThusday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
     if (this.IsNumber(e.currentTarget.value)) {
+      const value = e.currentTarget.value === '' ? '' : Number.parseFloat(e.currentTarget.value)
       this.setState({
-        workTimeTue: Number.parseFloat(e.currentTarget.value),
+        workTimeTue: value,
       });
     }
   }
 
   public onChangeWorkingTimeWednesday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
     if (this.IsNumber(e.currentTarget.value)) {
+      const value = e.currentTarget.value === '' ? '' : Number.parseFloat(e.currentTarget.value)
       this.setState({
-        workTimeWed: Number.parseFloat(e.currentTarget.value),
+        workTimeWed: value,
       });
     }
   }
 
   public onChangeWorkingTimeThursday = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
     if (this.IsNumber(e.currentTarget.value)) {
+      const value = e.currentTarget.value === '' ? '' : Number.parseFloat(e.currentTarget.value)
       this.setState({
-        workTimeThu: Number.parseFloat(e.currentTarget.value),
+        workTimeThu: value,
       });
     }
   }
@@ -101,8 +123,6 @@ class WorkingTimePage extends React.Component<{}, IState> {
     }
   }
 
-  public toNumber = (value: any) : number => Number.isNaN(value) ? 0 : value;
-
   public onApplyClick = () => {
     const {
       workTimeMon,
@@ -113,25 +133,18 @@ class WorkingTimePage extends React.Component<{}, IState> {
     } = this.state;
 
     // 총 근무시간 계산
-    const workHourWeekToMin = (
-      Math.floor(this.toNumber(workTimeMon)) + 
-      Math.floor(this.toNumber(workTimeTue)) +
-      Math.floor(this.toNumber(workTimeWed)) +
-      Math.floor(this.toNumber(workTimeThu))) * 60;
-    const workMinWeek = Math.round(
-      this.toUnderPointNumber(this.toNumber(workTimeMon))
-      + this.toUnderPointNumber(this.toNumber(workTimeTue))
-      + this.toUnderPointNumber(this.toNumber(workTimeWed))
-      + this.toUnderPointNumber(this.toNumber(workTimeThu))
-      + workHourWeekToMin);
-
-    const doneTime = this.toMinutesToHourMin(workMinWeek);
+    const doneTime = totalWorkMinWeek({
+      workTimeMon,
+      workTimeTue,
+      workTimeWed,
+      workTimeThu,
+    })
 
     // 남은 시간 계산
     const totalDate = new Date(0, 0, 1, doneTime.hour, doneTime.min, 0);
     const fourtyHour = new Date(0, 0, 1, 40, 0, 0);
     let remainTotalMin = (fourtyHour.getTime() - totalDate.getTime()) / 1000 / 60;
-    const remainTime = this.toMinutesToHourMin(remainTotalMin);
+    const remainTime = minutesToHourMin(remainTotalMin);
 
     if (remainTime.hour <= 4 && remainTime.min <= 0) {
       remainTime.hour = 4;
@@ -139,34 +152,18 @@ class WorkingTimePage extends React.Component<{}, IState> {
       remainTotalMin = 240;
     }
 
-    let additionalMinutes = 30;
-    if (remainTotalMin < 480) { // 8시간 미만
-      additionalMinutes = 30;
-    } else if (remainTotalMin < 720) {  // 8시간이상~12시간미만
-      additionalMinutes = 60;
-    } else if (remainTotalMin < 960) {  // 12시간이상~16시간미만
-      additionalMinutes = 90;
-    }
+    const additionalMinutes = getAdditionalMinutes(remainTotalMin);
 
-    // const realRemainMinutes = this.toMinutesToHourMin(remainTotalMin + additionalMinutes);
     const officeTimeFriday = comeToOfficeTimeFri.split(':');
     const comeToOfficeDate = new Date(0, 0, 2, Number(officeTimeFriday[0]), Number(officeTimeFriday[1]), 0);
-    // const remainDate = new Date(0, 0, 0, realRemainMinutes.hour, realRemainMinutes.min, 0);
     comeToOfficeDate.setMinutes(comeToOfficeDate.getMinutes() + remainTotalMin + additionalMinutes);
-    // const canOutOfOfficeDate = this.toMinutesToHourMin(comeToOfficeDate.getTime() / 1000 / 60);
     this.setState({
-      canOutOfOfficeTime: `${this.pad2(comeToOfficeDate.getHours())}:${this.pad2(comeToOfficeDate.getMinutes())}`,
-      remainTime: `${this.pad2(remainTime.hour)}:${this.pad2(remainTime.min)}`,
-      totalWorkingTime: `${this.pad2(doneTime.hour)}:${this.pad2(doneTime.min)}`,
+      canOutOfOfficeTime: `${pad2(comeToOfficeDate.getHours())}:${pad2(comeToOfficeDate.getMinutes())}`,
+      remainTime: `${pad2(remainTime.hour)}:${pad2(remainTime.min)}`,
+      totalWorkingTime: `${pad2(doneTime.hour)}:${pad2(doneTime.min)}`,
     })
   }
 
-  public pad2 = (num: string | number) => (Number(num) < 10 ? '0' : '') + num;
-
-  public toMinutesToHourMin = (totalMinutes: number) => ({
-    hour: Math.floor(totalMinutes / 60),
-    min: totalMinutes % 60,
-  })
 
   public onChangeComeToOfficeTime = (e: any) => {
     this.setState({
@@ -174,30 +171,10 @@ class WorkingTimePage extends React.Component<{}, IState> {
     });
   }
 
-  public toUnderPointNumber = (time: number) => (time - Math.floor(time)) * 100;
-  
   public render() {
     return (
-      <>
-        <span>
-          <h2 style={{display: 'inline-block'}}>
-            {'퇴근가능시간은?'}
-          </h2>
-        </span>
-        <span>
-          <h3 style={{display: 'inline-block', color: 'red'}}>
-            {this.state.canOutOfOfficeTime}
-          </h3>
-        </span>
-        <h3>
-          {'남은시간'}
-          {this.state.remainTime}
-        </h3>
-        <h3>
-          {'총 근무 시간'}
-          {this.state.totalWorkingTime}
-        </h3>
-        <div style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{ display: 'flex'}}>
+        <div style={{display: 'flex', flexDirection: 'column', flex: 1}}>
           <TextField
             id="standard-number"
             label="Monday"
@@ -272,15 +249,29 @@ class WorkingTimePage extends React.Component<{}, IState> {
             }}
             value={this.state.comeToOfficeTimeFri}
           />
-          <Button
-            variant="contained"
-            color="default"
-            onClick={this.onApplyClick}
-          >
-            {'적용'}
-          </Button>
         </div>
-      </>
+        <div style={{ display: 'flex', flexDirection: 'column'}}>
+          <div id="empty-div" style={{ flex: 1 }} />
+          <Typography variant="h5" component="div" style={{ color: 'darkgray' }}>
+            전체 근무 시간
+          </Typography>
+          <Typography variant="body2" style={{ textAlign: 'end' }}>
+            {this.state.totalWorkingTime}
+          </Typography>
+          <Typography variant="h5" component="div" style={{ color: 'darkgray' }}>
+            남은 근무 시간
+          </Typography>
+          <Typography variant="body2" style={{ textAlign: 'end' }}>
+            {this.state.remainTime}
+          </Typography>
+          <Typography variant="h5" component="div" style={{ color: 'darkgray' }}>
+            퇴근 가능 시간
+          </Typography>
+          <Typography variant="body2" style={{ textAlign: 'end' }}>
+            {this.state.canOutOfOfficeTime}
+          </Typography>
+        </div>
+      </div>
     )
   }
 } 
