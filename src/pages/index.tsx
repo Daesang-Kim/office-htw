@@ -5,5 +5,6 @@ export { default as NewWorkingTimePage } from './NewWorkingTimePage/NewWorkingTi
 export { default as InfoPage } from './InfoPage/InfoPage';
 export { default as FoodistUploadPage } from './FoodistUploadPage/FoodistUploadPage';
 export { default as VisitorPage } from './Visitor/Visitor';
+export { default as WorkingTimeRoot } from './WorkingTimeRoot/WorkingTimeRoot';
 export { default as SettingsPage } from './Settings/Settings';
 export { default as NewsPage } from './News/News'

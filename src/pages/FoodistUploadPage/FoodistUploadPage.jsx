@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const FoodistUploadPage = () => {
-  // const [imageSrc, setImageSrc] = React.useState('');
+  const [imageSrc, setImageSrc] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState('');
 
@@ -22,23 +22,13 @@ const FoodistUploadPage = () => {
     setOpen(false);
   };
 
-  React.useEffect(() => {
-    const db = getDatabase();
-    const imageRef = ref(db, 'images/');
-    onValue(imageRef, snapshot => {
-      const img = (snapshot.val() && snapshot.val().imageSrc) || '';
-      const lastUp = (snapshot.val() && snapshot.val().lastUpdate) || '';
-      // setImageSrc(img);
-    })
-  }, []);
-
   const onFileChange = event => {
     const input = event.target;
 
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
-        // setImageSrc(e.target.result);
+        setImageSrc(e.target.result);
       };
       reader.readAsDataURL(input.files[0]);
     }

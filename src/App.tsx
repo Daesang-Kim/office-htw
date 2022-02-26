@@ -17,7 +17,8 @@ import {
   //   ShuttleBusPage,
   // VisitorPage,
   SettingsPage,
-  WorkingTimePage,
+  // WorkingTimePage,
+  WorkingTimeRoot,
 } from './pages';
 import ClockIcon from './res/icons/clock.svg';
 import FoodIcon from './res/icons/food.svg';
@@ -67,7 +68,7 @@ const App = () => {
             <FoodistPage />
         )}
         {init && value === 2 && (
-            <WorkingTimePage />
+            <WorkingTimeRoot />
         )}
         {init && value === 3 && (
             <SettingsPage />

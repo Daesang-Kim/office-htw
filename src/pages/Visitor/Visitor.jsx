@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 
-const AnimalsPage = () => {
+const VisitorPage = () => {
   const [text, setText] = useState('');
   const [visitorLogs, setVisitorLogs] = useState({});
   React.useEffect(() => {
@@ -82,4 +82,4 @@ const AnimalsPage = () => {
   );
 }
 
-export default AnimalsPage;
+export default VisitorPage;

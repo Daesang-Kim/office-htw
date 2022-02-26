@@ -10,8 +10,8 @@ import {
   // toNumber,
   minutesToHourMin,
   pad2,
-  totalWorkMinWeek
-} from './calculation'
+  totalWorkMinWeek,
+} from '../../utils/calculation'
 // import styles from './WorkingTimePageStyled';
 interface IState {
   workTimeMon: number | string,
