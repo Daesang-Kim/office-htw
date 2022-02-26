@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
-import firebase from 'firebase/app';
+import { getDatabase, onValue, ref, update } from "firebase/database";
+import {
+  firebaseFunctions,
+} from '../../utils/fb';
 import {
   Button,
 } from '@material-ui/core';
-import i20210411_074214 from '../../res/images/20210411_074214.jpg';
-import i20210415_182520 from '../../res/images/20210415_182520.jpg';
-import i20210417_200729 from '../../res/images/20210417_200729.jpg';
-import i20210418_135413 from '../../res/images/20210418_135413.jpg';
-import i20210418_135759 from '../../res/images/20210418_135759.jpg';
-import i20210418_210314 from '../../res/images/20210418_210314.jpg';
+import TextField from '@mui/material/TextField';
 
-const AnimalsPage = () => {
-  const [show, setShow] = useState(false);
+const VisitorPage = () => {
   const [text, setText] = useState('');
   const [visitorLogs, setVisitorLogs] = useState({});
   React.useEffect(() => {
     refreshVisitorLogDB();
   }, []);
 
-  const onShowButtonClick = () => {
-    setShow(!show);
-  }
   const onTextChange = e => {
     setText(e.target.value);
   }
@@ -30,35 +24,43 @@ const AnimalsPage = () => {
     }
   }
   const onOKClick = () => {
-    const database = firebase.database();
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     const date = `${year}${month}${currentDate.getDate().toString().padStart(2, '0')}`
     const time = currentDate.valueOf();
-      database.ref(`visitorlog/${date}`).update({
+    const db = getDatabase();
+    const updates = {
+      [`visitorlog/${date}`]: {
         [time]: text,
-      });
+      }
+    }
+    update(ref(db), updates)
     setText('');
     refreshVisitorLogDB();
   }
   const refreshVisitorLogDB = () => {
-    const database = firebase.database();
-    database.ref('visitorlog/').once('value').then(snapshot => {
+    const db = getDatabase();
+    const visitorLogRef = ref(db, 'visitorlog/');
+    onValue(visitorLogRef, snapshot => {
       const visitLogs = snapshot.val() || {};
       setVisitorLogs(visitLogs);
     })
   }
+  
   return (
     <div>
-      <div>{'앱이 마음에 드십니까?'}</div>
       <div style={{ display: 'flex' }}>
-        <div>{'한줄평: '}</div>
         <div style={{ display: 'flex', flex: 1 }}>
-          <input onChange={onTextChange} onKeyPress={onTextKeyPress} value={text} style={{ width: '100%' }} type="text" />
+          <TextField fullWidth label="한줄평" id="one-line-comment" variant="standard"
+            onKeyPress={onTextKeyPress}
+            onChange={onTextChange}
+            value={text}
+          />
           <Button variant="contained" color="default" onClick={onOKClick}>OK</Button>
         </div>
       </div>
+      <hr />
       <div>
         {visitorLogs && Object.keys(visitorLogs).length > 0 && (
           Object.keys(visitorLogs).map(dateKey => {
@@ -76,24 +78,8 @@ const AnimalsPage = () => {
           }).reverse()
         )}
       </div>
-
-      <div>
-        <Button variant="contained" color="default" onClick={onShowButtonClick} style={{ width: '100%'}}>
-          { show ? "접기" : "펼치기"}
-        </Button>
-      </div>
-      { show && (
-        <div>
-          <img style={{ width: '100%' }} src={i20210411_074214} />
-          <img style={{ width: '100%' }} src={i20210415_182520} />
-          <img style={{ width: '100%' }} src={i20210417_200729} />
-          <img style={{ width: '100%' }} src={i20210418_135413} />
-          <img style={{ width: '100%' }} src={i20210418_135759} />
-          <img style={{ width: '100%' }} src={i20210418_210314} />
-        </div>
-      )}
     </div>
   );
 }
 
-export default AnimalsPage;
+export default VisitorPage;

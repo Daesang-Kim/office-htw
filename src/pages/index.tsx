@@ -4,4 +4,7 @@ export { default as WorkingTimePage } from './WorkingTimePage/WorkingTimePage';
 export { default as NewWorkingTimePage } from './NewWorkingTimePage/NewWorkingTimePage';
 export { default as InfoPage } from './InfoPage/InfoPage';
 export { default as FoodistUploadPage } from './FoodistUploadPage/FoodistUploadPage';
-export { default as AnimalsPage } from './Animals/AnimalsPage';
+export { default as VisitorPage } from './Visitor/Visitor';
+export { default as WorkingTimeRoot } from './WorkingTimeRoot/WorkingTimeRoot';
+export { default as SettingsPage } from './Settings/Settings';
+export { default as NewsPage } from './News/News'

@@ -7,6 +7,16 @@ const InfoPage = () => (
   <div>
     <hr />
     <UpdateDescription new>
+      {'2022.02.12'}<br />
+      {'- PWA 적용. Web 기반 앱 설치 가능'}<br />
+      {'- firebase version update'}<br />
+      {'- UI/UX 개선'}<br />
+      {'- 접속 URI 변경'}<br />
+      {'- 한화테크윈 기사 검색 및 노출'}<br />
+      {'- 전체 메뉴 리뉴얼'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2021.05.05'}<br />
       {'- 하단 메뉴로 UX를 변경'}<br />
       {'- 전체 SW Warning 수정'}<br />

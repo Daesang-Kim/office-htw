@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { UploadStyled } from './FoodistUploadPageStyled';
 import { Input, Button } from '@material-ui/core';
-import firebase from 'firebase/app';
+import { getDatabase, onValue, ref, set, update } from "firebase/database";
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -22,14 +22,6 @@ const FoodistUploadPage = () => {
     setOpen(false);
   };
 
-  React.useEffect(() => {
-    const database = firebase.database();
-    database.ref('images/').once('value').then(function(snapshot){
-      const img = (snapshot.val() && snapshot.val().imageSrc) || '';
-      setImageSrc(img);
-    })
-  }, []);
-
   const onFileChange = event => {
     const input = event.target;
 
@@ -48,22 +40,24 @@ const FoodistUploadPage = () => {
       handleClose();
     } else {
       // 이미지 저장
-      const database = firebase.database();
-      database.ref('images/').update({
-        imageSrc,
-        lastUpdate: new Date(),
-      });
+      const db = getDatabase();
+      const updates = {
+        ['images/']: {
+          imageSrc,
+          lastUpdate: new Date(),
+        },
+      };
+      update(ref(db), updates)
       setMessage('okay');
       handleClose();
     }
   }
   return (
     <UploadStyled>
-      <label>Upload</label>
       <Input type="file" onChange={onFileChange}>클릭</Input>
       <Button onClick={handleClickOpen}>Submit</Button>
       <div style={{ color: 'red' }}>{message}</div>
-      <img style={{ width: '100%' }} src={imageSrc} />
+
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Warning</DialogTitle>
         <DialogContent>

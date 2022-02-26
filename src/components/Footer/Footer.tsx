@@ -41,7 +41,7 @@ const StyledLink = styled(Link)`
 const Header = () => (
   <Grid container={true}>
     <AppBar position="relative" style={{ position: 'fixed', left: 0, bottom: 0 }}>
-      <Toolbar>
+      <Toolbar style={{ backgroundColor: '#f37321'}}>
         <StyledLink to="/Foodist">메뉴</StyledLink>
         <StyledLink to="/WorkingTime">퇴능</StyledLink>
         <StyledLink to="/NewWorkingTime">Nu퇴능</StyledLink>

@@ -4,6 +4,10 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import * as React from 'react';
+import {
+  minutesToHourMin,
+  pad2,
+} from '../../utils/calculation'
 import styles from './NewWorkingTimePageStyled';
 
 interface IProps extends WithStyles<typeof styles> {
@@ -58,13 +62,13 @@ class NewWorkingTimePage extends React.Component<IProps, IState> {
       this.toUnderPointNumber(this.toNumber(workTime))
       + workHourWeekToMin);
 
-    const doneTime = this.toMinutesToHourMin(workMinWeek);
+    const doneTime = minutesToHourMin(workMinWeek);
 
     // 남은 시간 계산
     const totalDate = new Date(0, 0, 1, doneTime.hour, doneTime.min, 0);
     const fourtyHour = new Date(0, 0, 1, 40, 0, 0);
     let remainTotalMin = (fourtyHour.getTime() - totalDate.getTime()) / 1000 / 60;
-    const remainTime = this.toMinutesToHourMin(remainTotalMin);
+    const remainTime = minutesToHourMin(remainTotalMin);
 
     if (remainTime.hour <= 4 && remainTime.min <= 0) {
       remainTime.hour = 4;
@@ -81,24 +85,14 @@ class NewWorkingTimePage extends React.Component<IProps, IState> {
       additionalMinutes = 90;
     }
 
-    // const realRemainMinutes = this.toMinutesToHourMin(remainTotalMin + additionalMinutes);
     const officeTimeFriday = comeToOfficeTimeFri.split(':');
     const comeToOfficeDate = new Date(0, 0, 2, Number(officeTimeFriday[0]), Number(officeTimeFriday[1]), 0);
-    // const remainDate = new Date(0, 0, 0, realRemainMinutes.hour, realRemainMinutes.min, 0);
     comeToOfficeDate.setMinutes(comeToOfficeDate.getMinutes() + remainTotalMin + additionalMinutes);
-    // const canOutOfOfficeDate = this.toMinutesToHourMin(comeToOfficeDate.getTime() / 1000 / 60);
     this.setState({
-      canOutOfOfficeTime: `${this.pad2(comeToOfficeDate.getHours())}:${this.pad2(comeToOfficeDate.getMinutes())}`,
-      remainTime: `${this.pad2(remainTime.hour)}:${this.pad2(remainTime.min)}`,
+      canOutOfOfficeTime: `${pad2(comeToOfficeDate.getHours())}:${pad2(comeToOfficeDate.getMinutes())}`,
+      remainTime: `${pad2(remainTime.hour)}:${pad2(remainTime.min)}`,
     })
   }
-
-  public pad2 = (num: string | number) => (Number(num) < 10 ? '0' : '') + num;
-
-  public toMinutesToHourMin = (totalMinutes: number) => ({
-    hour: Math.floor(totalMinutes / 60),
-    min: totalMinutes % 60,
-  })
 
   public onChangeComeToOfficeTime = (e: any) => {
     this.setState({
