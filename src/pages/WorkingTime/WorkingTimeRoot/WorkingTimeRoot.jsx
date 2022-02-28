@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { WorkingTimePage, NewWorkingTimePage } from '../.';
+import { WorkingTimePage, NewWorkingTimePage } from '../../.';
 
 const WorkingTimeRoot = () => {
   const [value, setValue] = React.useState('1');

@@ -13,7 +13,8 @@ import {
   FoodistUploadPage,
   InfoPage,
   VisitorPage,
-} from '../../pages';
+  ShuttleBusPage,
+} from '../..';
 
 const Settings = () => {
   return (
@@ -40,6 +41,18 @@ const Settings = () => {
         </AccordionSummary>
         <AccordionDetails>
           <FoodistUploadPage />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Shuttle Bus</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <ShuttleBusPage />
         </AccordionDetails>
       </Accordion>
       <Accordion>

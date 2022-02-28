@@ -15,8 +15,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import SeohyunShuttle from '../../components/shuttleBus/SeohyunShuttle/SeohyunShuttle';
-import YatabShuttle from '../../components/shuttleBus/YatabShuttle/YatabShuttle';
+import SeohyunShuttle from '../../../components/shuttleBus/SeohyunShuttle/SeohyunShuttle';
+import YatabShuttle from '../../../components/shuttleBus/YatabShuttle/YatabShuttle';
 import {
   styles,
   Container,

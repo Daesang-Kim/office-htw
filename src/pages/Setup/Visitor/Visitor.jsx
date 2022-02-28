@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getDatabase, onValue, ref, update } from "firebase/database";
 import {
   firebaseFunctions,
-} from '../../utils/fb';
+} from '../../../utils/fb';
 import {
   Button,
 } from '@material-ui/core';

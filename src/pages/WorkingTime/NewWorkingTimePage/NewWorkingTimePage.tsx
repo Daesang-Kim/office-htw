@@ -7,7 +7,7 @@ import * as React from 'react';
 import {
   minutesToHourMin,
   pad2,
-} from '../../utils/calculation'
+} from '../../../utils/calculation'
 import styles from './NewWorkingTimePageStyled';
 
 interface IProps extends WithStyles<typeof styles> {
