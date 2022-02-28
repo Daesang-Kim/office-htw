@@ -8,3 +8,4 @@ export { default as VisitorPage } from './Setup/Visitor/Visitor';
 export { default as WorkingTimeRoot } from './WorkingTime/WorkingTimeRoot/WorkingTimeRoot';
 export { default as SettingsPage } from './Setup/Settings/Settings';
 export { default as NewsPage } from './News/News'
+export { default as GoogleTimer } from './WorkingTime/GoogleTimer/GoogleTimer'
