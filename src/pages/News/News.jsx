@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import { ref } from "firebase/database";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
 import {
   firebaseFunctions,
 } from '../../utils/fb';
 
+const NewsItem = ({ title, link }) => (
+  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <a href={link}>
+      <div dangerouslySetInnerHTML={{ __html: title }}></div>
+    </a>
+  </div>
+)
+
+
 const NewsPage = () => {
-  const [newsData, setNewsData] = useState(null);
+  const [newsRowData, setNewsRowData] = useState(null);
+  const [onlyNaverNews, setOnlyNaverNews] = useState(true);
+
+  
   React.useEffect(() => {
     loadNews();
   }, []);
+  
+  const handleOnlyNaverNewsCheckChange = event => {
+    setOnlyNaverNews(event.target.checked);
+  };
 
   const loadNews = () => {
     const searchNaverNews = firebaseFunctions('searchNaverNews');
@@ -24,7 +44,7 @@ const NewsPage = () => {
           const jsonData = JSON.parse(result.data)
           // console.log(jsonData)
           if (jsonData.errorMessage) {
-            return setNewsData({ items: [{
+            return setNewsRowData({ items: [{
               title: 'ERROR',
               link: '/',
             }, {
@@ -33,13 +53,7 @@ const NewsPage = () => {
             },
             ]});
           }
-          const newsItems = {
-            ...jsonData,
-          }
-          if (Array.isArray(jsonData.items)) {
-            newsItems.items = jsonData.items.filter(item => item.link.includes('news.naver.com'))
-          }
-          setNewsData(newsItems);
+          setNewsRowData(jsonData);
         })
         .catch((error) => {
           // Getting the Error details.
@@ -47,7 +61,7 @@ const NewsPage = () => {
           const message = error.message;
           const details = error.details;
           // ...
-          setNewsData({ items: [{
+          setNewsRowData({ items: [{
             title: 'ERROR',
             link: '/',
           }, {
@@ -60,17 +74,21 @@ const NewsPage = () => {
   }
 
   return (
-    <div>
-        <div>
-          { newsData && newsData.items.map((item, idx) => (
-            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <a href={item.link}>
-                <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
-              </a>
-            </div>)
-          )}
-        </div>
-    </div>
+    <Box>
+      <FormGroup>
+        <FormControlLabel
+          control={<Checkbox checked={onlyNaverNews} onChange={handleOnlyNaverNewsCheckChange} inputProps={{ 'aria-label': 'controlled' }} />}
+          label="네이버 뉴스만 보기(언론사페이지제외)"
+          labelPlacement="end"
+        />
+      </FormGroup>
+      <Box>
+        { newsRowData && (onlyNaverNews
+          ? newsRowData.items.filter(filterItem => filterItem.link.includes('news.naver.com')).map((item, idx) => <NewsItem key={idx} title={item.title} link={item.link} />)
+          : newsRowData.items.map((item, idx) => <NewsItem key={idx} title={item.title} link={item.link} />))
+        }
+      </Box>
+    </Box>
   );
 }
 
