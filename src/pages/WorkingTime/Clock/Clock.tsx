@@ -3,9 +3,9 @@ import * as React from 'react';
 import {
     Container,
     GoogleTimerContainer,
-} from './GoogleTimer.styled';
+} from './Clock.styled';
 
-const GoogleTimer = () => {
+const AnalogClock = () => {
     const [style, setStyle] = React.useState({
         hours: 'rotate(0deg)',
         minutes: 'rotate(0deg)',
@@ -21,9 +21,6 @@ const GoogleTimer = () => {
             const minRotation = 6 * min;
             const secRotation = 6 * sec;
 
-            // hours.style.transform = `rotate(${hrRotation}deg)`;
-            // minutes.style.transform = `rotate(${minRotation}deg)`;
-            // seconds.style.transform = `rotate(${secRotation}deg)`;
             setStyle({
                 hours: `rotate(${hrRotation}deg)`,
                 minutes: `rotate(${minRotation}deg)`,
@@ -33,6 +30,18 @@ const GoogleTimer = () => {
     }, [])
 
     return (
+        <Container>
+            <div id="clock">
+                <div id="hours" style={{ transform: style.hours }} />
+                <div id="minutes" style={{ transform: style.minutes }} />
+                <div id="seconds" style={{ transform: style.seconds }} />
+            </div>
+        </Container>
+    )
+};
+
+const ClockRoot = () => {
+    return (
         <Box>
             <div>GoogleTimer</div>
             <GoogleTimerContainer>
@@ -41,15 +50,9 @@ const GoogleTimer = () => {
                 </div>
             </GoogleTimerContainer>
             <div>현재 시간</div>
-            <Container>
-                <div id="clock">
-                    <div id="hours" style={{ transform: style.hours }} />
-                    <div id="minutes" style={{ transform: style.minutes }} />
-                    <div id="seconds" style={{ transform: style.seconds }} />
-                </div>
-            </Container>
+            <AnalogClock />
         </Box>
     )
 };
 
-export default GoogleTimer;
+export default ClockRoot;

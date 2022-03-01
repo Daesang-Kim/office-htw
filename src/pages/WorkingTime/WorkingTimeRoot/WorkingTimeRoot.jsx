@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { WorkingTimePage, NewWorkingTimePage, GoogleTimer } from '../../.';
+import { WorkingTimePage, NewWorkingTimePage, ClockRoot } from '../../.';
 
 const WorkingTimeRoot = () => {
   const [value, setValue] = React.useState('1');
@@ -25,7 +25,7 @@ const WorkingTimeRoot = () => {
         </Box>
         <TabPanel value="1"><WorkingTimePage /></TabPanel>
         <TabPanel value="2"><NewWorkingTimePage /></TabPanel>
-        <TabPanel value="3"><GoogleTimer /></TabPanel>
+        <TabPanel value="3"><ClockRoot /></TabPanel>
       </TabContext>
     </Box>
   );
