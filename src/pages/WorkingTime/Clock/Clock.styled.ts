@@ -1,12 +1,27 @@
 import styled from 'styled-components';
 
 export const GoogleTimerContainer = styled.div`
-    #clock {
-        width: 200px;
-        height: 200px;
-        background: wheat;
-        border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #clock-wrapper {
+        display: flex;
+        width: 250px;
+        height: 250px;
+        background: lightblue;
+        border: 2px solid black;
+    }
+    .img-clock-face {
+        width: 100%;
+        height: 100%;
+    }
+    #clock-center {
+        width: 20px;
+        height: 20px;
+        background: black;
+        border: 2px solid black;
         border-radius: 50%;
+        margin: 90px;
     }
 `;
 

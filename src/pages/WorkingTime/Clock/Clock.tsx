@@ -1,4 +1,6 @@
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import * as React from 'react';
 import {
     Container,
@@ -44,9 +46,18 @@ const ClockRoot = () => {
     return (
         <Box>
             <div>GoogleTimer</div>
+            <TextField
+                required={true}
+                id="outlined-required"
+                label="Required (분)"
+                variant="standard"
+                defaultValue="30"
+            />
+            <Button style={{ height: '48px' }} variant="outlined">설정</Button>
             <GoogleTimerContainer>
-                <div id="clock">
-                    <div />
+                <div id="clock-wrapper">
+                    <img src="./images/clock-face.jpg" className="img-clock-face" />
+                    {/* <div id="clock-center" /> */}
                 </div>
             </GoogleTimerContainer>
             <div>현재 시간</div>
