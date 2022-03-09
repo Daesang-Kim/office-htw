@@ -1,23 +1,11 @@
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import * as React from 'react';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Switch,
-// } from 'react-router-dom';
-// import Footer from './components/Footer';
 import Header from './components/Header';
 import {
   FoodistPage,
-  //   FoodistUploadPage,
-  // InfoPage,
   NewsPage,
-  //   NewWorkingTimePage,
-  //   ShuttleBusPage,
-  // VisitorPage,
   SettingsPage,
-  // WorkingTimePage,
   WorkingTimeRoot,
 } from './pages';
 import ClockIcon from './res/icons/clock.svg';
@@ -42,22 +30,6 @@ const App = () => {
   }
 
   return (
-    // <Router>
-    //   
-    //   <Switch>
-    //     <Route path="/Main" compoonent={NewsPage} />
-    //     <Route path="/Foodist" component={FoodistPage} />
-    //     <Route path="/WorkingTime" component={WorkingTimePage} />
-    //     <Route path="/NewWorkingTime" component={NewWorkingTimePage} />
-    //     <Route path="/ShuttleBus" component={ShuttleBusPage} />
-    //     <Route path="/Info" component={InfoPage} />
-    //     <Route path="/FoodistUpload" component={FoodistUploadPage} />
-    //     <Route path="/Animals" component={AnimalsPage} />
-    //     <Route path="/" component={NewsPage} />
-    //   </Switch>
-    //   <div style={{ height: '56px'}} />
-    //   <Footer />
-    // </Router>
     <>
       <div style={{ marginBottom: '60px' }}>
         <Header />
