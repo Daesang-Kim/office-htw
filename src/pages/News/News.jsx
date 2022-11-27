@@ -77,7 +77,14 @@ const NewsPage = () => {
     <Box>
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox checked={onlyNaverNews} onChange={handleOnlyNaverNewsCheckChange} inputProps={{ 'aria-label': 'controlled' }} />}
+          control={<Checkbox
+            checked={onlyNaverNews}
+            onChange={handleOnlyNaverNewsCheckChange}
+            inputProps={{
+              'aria-label': 'controlled',
+              'data-testid':'chkbx-only-naver-news'
+            }}
+          />}
           label="네이버 뉴스만 보기(언론사페이지제외)"
           labelPlacement="end"
         />

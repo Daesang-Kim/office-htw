@@ -52,10 +52,10 @@ const App = () => {
           value={value}
           onChange={onNavigationChange}
         >
-          <BottomNavigationAction icon={<img width="100%" height="100%" src={NewsIcon} />} />
-          <BottomNavigationAction icon={<img width="100%" height="100%" src={FoodIcon} />} />
-          <BottomNavigationAction icon={<img width="100%" height="100%" src={ClockIcon} />} />
-          <BottomNavigationAction icon={<img width="100%" height="100%" src={SettingsIcon} />} />
+          <BottomNavigationAction data-testid="nav-news-icon" icon={<img width="100%" height="100%" src={NewsIcon} />} />
+          <BottomNavigationAction data-testid="nav-food-icon" icon={<img width="100%" height="100%" src={FoodIcon} />} />
+          <BottomNavigationAction data-testid="nav-clock-icon" icon={<img width="100%" height="100%" src={ClockIcon} />} />
+          <BottomNavigationAction data-testid="nav-setting-icon" icon={<img width="100%" height="100%" src={SettingsIcon} />} />
         </BottomNavigation>
       </div>
     </>
