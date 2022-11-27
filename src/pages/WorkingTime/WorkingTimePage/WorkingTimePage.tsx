@@ -146,7 +146,7 @@ class WorkingTimePage extends React.Component<{}, IState> {
     let remainTotalMin = (fourtyHour.getTime() - totalDate.getTime()) / 1000 / 60;
     const remainTime = minutesToHourMin(remainTotalMin);
 
-    if (remainTime.hour <= 4 && remainTime.min <= 0) {
+    if (remainTotalMin <= 240) {
       remainTime.hour = 4;
       remainTime.min = 0;
       remainTotalMin = 240;
