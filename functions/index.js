@@ -24,7 +24,7 @@ exports.searchNaverNews = functions.https.onRequest(async(req, response) => {
   // console.log(query, display, start, sort);
 
   var options = {
-    url : `https://openapi.naver.com/v1/search/news.json?query=${qs.escape('한화테크윈')}&display=${100}`,
+    url : `https://openapi.naver.com/v1/search/news.json?query=${qs.escape('한화비전')}&display=${100}`,
     method:'GET',
     headers: headers,
   };
