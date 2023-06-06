@@ -4,6 +4,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
+import { Button } from '@material-ui/core';
 import {
   firebaseFunctions,
 } from '../../utils/fb';
@@ -21,10 +22,9 @@ const NewsPage = () => {
   const [newsRowData, setNewsRowData] = useState(null);
   const [onlyNaverNews, setOnlyNaverNews] = useState(true);
 
-  
-  React.useEffect(() => {
+  const handleNewsSearch = () => {
     loadNews();
-  }, []);
+  }
   
   const handleOnlyNaverNewsCheckChange = event => {
     setOnlyNaverNews(event.target.checked);
@@ -34,7 +34,7 @@ const NewsPage = () => {
     const searchNaverNews = firebaseFunctions('searchNaverNews');
     if (searchNaverNews != null) {
       searchNaverNews({ params: {
-        query: '한화테크윈',
+        query: '한화비전',
         display: 100,
         start: 1,
         sort: 'date', // 'sim'
@@ -75,6 +75,7 @@ const NewsPage = () => {
 
   return (
     <Box>
+      <Button color="secondary" variant="contained" onClick={handleNewsSearch}>Load Hanhwa vision news!</Button>
       <FormGroup>
         <FormControlLabel
           control={<Checkbox checked={onlyNaverNews} onChange={handleOnlyNaverNewsCheckChange} inputProps={{ 'aria-label': 'controlled' }} />}
