@@ -13,7 +13,7 @@ const Header = () => (
     <AppBar position="static" color="default">
       <Toolbar>
         <Typography variant="title" color="default">
-          HTW
+          H-Vision
         </Typography>
       </Toolbar>
     </AppBar>
