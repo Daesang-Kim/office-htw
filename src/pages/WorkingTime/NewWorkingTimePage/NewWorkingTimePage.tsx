@@ -15,7 +15,7 @@ interface IProps extends WithStyles<typeof styles> {
 }
 
 interface IState {
-  workTime: number,
+  workTime: number | string,
   comeToOfficeTimeFri: string,
   canOutOfOfficeTime: string,
   remainTime: string,
@@ -41,8 +41,9 @@ class NewWorkingTimePage extends React.Component<IProps, IState> {
 
   public onChangeWorkingTime = (e:React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
     if (this.IsNumber(e.currentTarget.value)) {
+      const value = e.currentTarget.value === '' ? '' : Number.parseFloat(e.currentTarget.value)
       this.setState({
-        workTime: Number.parseFloat(e.currentTarget.value),
+        workTime: value,
       });
     }
   }
