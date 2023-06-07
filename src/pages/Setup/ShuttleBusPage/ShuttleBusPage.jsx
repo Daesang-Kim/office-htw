@@ -28,12 +28,12 @@ const ShuttleBusPage = () => (
     {'금요일은 6시 30분이 막차'}
     <br />
     <Router>
-      <Link to="/ShuttleBus/YatabShuttle" style={{margin: "5px"}}>야탑</Link>
-      <Link to="/ShuttleBus/SeohyunShuttle" style={{margin: "5px"}}>서현</Link>
+      <Link to="./bus-yatab" style={{margin: "5px"}}>야탑</Link>
+      <Link to="./bus-seohyun" style={{margin: "5px"}}>서현</Link>
       {/* <Link to="/ShuttleBus/SuwonShuttle" style={{margin: "5px"}}>수원</Link> */}
       <Switch>
-        <Route path="/ShuttleBus/YatabShuttle" component={YatabShuttle} />
-        <Route path="/ShuttleBus/SeohyunShuttle" component={SeohyunShuttle}/>
+        <Route path="/bus-yatab" component={YatabShuttle} />
+        <Route path="/bus-seohyun" component={SeohyunShuttle}/>
         {/* <Route path="/ShuttleBus/SuwonShuttle"  /> */}
       </Switch>
       
