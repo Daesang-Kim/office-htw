@@ -17,7 +17,7 @@
   * 안되는 경우 `firebase login --reauth` 를 해주고 다시 `yarn deploy` 하면 됨
 * server
   * `cd functions`
-  * `npm run serve`
+  * `yarn serve`
 
 ## 개발환경에서 Functions 호출 및 실행 방법
 * https://firebase.google.com/docs/functions/local-emulator#unix
