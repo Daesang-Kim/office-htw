@@ -1,12 +1,6 @@
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import * as React from 'react';
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
 import Header from './components/Header';
 import {
   FoodistPage,
@@ -37,31 +31,33 @@ const App = () => {
 
   return (
     <>
-      <Router>
-        <div style={{ marginBottom: '60px' }}>
-          <Header />
-            {init && (
-              <Switch>
-                <Route path="/news" component={NewsPage} />
-                <Route path="/foodist" component={FoodistPage}/>
-                <Route path="/working-time" component={WorkingTimeRoot}/>
-                <Route path="/settings" component={SettingsPage}/>
-              </Switch>
-            )}
-        </div>
-        <div style={{ position: 'fixed', left: 0, right: 0, bottom: 0}}>
-          <BottomNavigation
-            showLabels={true}
-            value={value}
-            onChange={onNavigationChange}
-          >
-            <BottomNavigationAction icon={<Link to="news"><img width="36px" height="36px" src={NewsIcon} /></Link>} />
-            <BottomNavigationAction icon={<Link to="foodist"><img width="36px" height="36px" src={FoodIcon} /></Link>} />
-            <BottomNavigationAction icon={<Link to="working-time"><img width="36px" height="36px" src={ClockIcon} /></Link>} />
-            <BottomNavigationAction icon={<Link to="settings"><img width="36px" height="36px" src={SettingsIcon} /></Link>} />
-          </BottomNavigation>
-        </div>
-      </Router>
+      <div style={{ marginBottom: '60px' }}>
+        <Header />
+        {init && value === 0 && (
+            <NewsPage />
+        )}
+        {init && value === 1 && (
+            <FoodistPage />
+        )}
+        {init && value === 2 && (
+            <WorkingTimeRoot />
+        )}
+        {init && value === 3 && (
+            <SettingsPage />
+        )}
+      </div>
+      <div style={{ position: 'fixed', left: 0, right: 0, bottom: 0}}>
+        <BottomNavigation
+          showLabels={true}
+          value={value}
+          onChange={onNavigationChange}
+        >
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={NewsIcon} />} />
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={FoodIcon} />} />
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={ClockIcon} />} />
+          <BottomNavigationAction icon={<img width="100%" height="100%" src={SettingsIcon} />} />
+        </BottomNavigation>
+      </div>
     </>
   );
 }
