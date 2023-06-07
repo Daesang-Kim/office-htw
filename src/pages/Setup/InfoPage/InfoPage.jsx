@@ -5,8 +5,16 @@ import {
 
 const InfoPage = () => (
   <div>
-    <hr />
     <UpdateDescription new>
+      {'2023.06.07'}<br />
+      {'- BottomNavigation 에 Router 적용'}<br />
+      {'- 앱 이름 변경'}<br />
+      {'- 뉴스를 불필요하게 부르지 않도록 수정'}<br />
+      {'- 한화비전 뉴스 검색하도록 수정'}<br />
+      {'- iPhone에서만 퇴근시간계산VER2의 숫자에 점(.) 안들어가는 문제 수정'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2022.02.12'}<br />
       {'- PWA 적용. Web 기반 앱 설치 가능'}<br />
       {'- firebase version update'}<br />

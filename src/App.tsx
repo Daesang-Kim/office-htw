@@ -46,6 +46,7 @@ const App = () => {
                 <Route path="/foodist" component={FoodistPage}/>
                 <Route path="/working-time" component={WorkingTimeRoot}/>
                 <Route path="/settings" component={SettingsPage}/>
+                <Route path="/" component={NewsPage} />
               </Switch>
             )}
         </div>
