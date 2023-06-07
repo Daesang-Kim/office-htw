@@ -11,9 +11,10 @@
 
 ## CLI
 * client
-  * `yarn start`
+  * `yarn`
   * `yarn build`
   * `yarn deploy`
+  * 안되는 경우 `firebase login --reauth` 를 해주고 다시 `yarn deploy` 하면 됨
 * server
   * `cd functions`
   * `npm run serve`
