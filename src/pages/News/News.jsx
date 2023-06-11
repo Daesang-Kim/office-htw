@@ -75,7 +75,7 @@ const NewsPage = () => {
 
   return (
     <Box>
-      <Button color="secondary" variant="contained" onClick={handleNewsSearch}>Load Hanhwa vision news!</Button>
+      <Button color="primary" variant="outlined" style={{ width: '100%'}} onClick={handleNewsSearch}>Load Hanhwa vision news!</Button>
       <FormGroup>
         <FormControlLabel
           control={<Checkbox checked={onlyNaverNews} onChange={handleOnlyNaverNewsCheckChange} inputProps={{ 'aria-label': 'controlled' }} />}

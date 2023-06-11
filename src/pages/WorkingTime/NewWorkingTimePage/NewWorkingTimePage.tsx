@@ -151,8 +151,8 @@ class NewWorkingTimePage extends React.Component<IProps, IState> {
             value={this.state.comeToOfficeTimeFri}
           />
           <Button
-            variant="contained"
-            color="default"
+            variant="outlined"
+            color="secondary"
             onClick={this.onApplyClick}
           >
             {'적용'}

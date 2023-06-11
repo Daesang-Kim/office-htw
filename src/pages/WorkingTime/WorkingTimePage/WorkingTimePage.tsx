@@ -1,5 +1,5 @@
 import {
-  // Button,
+  Button,
   TextField,
   // WithStyles,
 } from '@material-ui/core';
@@ -12,6 +12,10 @@ import {
   pad2,
   totalWorkMinWeek,
 } from '../../../utils/calculation'
+import {
+  getAllData,
+  setAllData,
+} from '../../../utils/storageManager';
 // import styles from './WorkingTimePageStyled';
 interface IState {
   workTimeMon: number | string,
@@ -37,13 +41,31 @@ class WorkingTimePage extends React.Component<{}, IState> {
   }
 
   public componentDidMount() {
+    const data = getAllData('WorkingTimePage');
+    this.setState({
+      ...data,
+    });
     this.onApplyClick()
   }
 
   public componentDidUpdate(prevProps: any, prevState: any) {
     if (JSON.stringify(prevState) !== JSON.stringify(this.state)) {
+      setAllData('WorkingTimePage', Object.keys(this.state).map(item => ({ key: item, value: this.state[item]})))
       this.onApplyClick()
     }
+  }
+
+  public onResetButtonClick = () => {
+    this.setState({
+      canOutOfOfficeTime: "계산 전",
+      comeToOfficeTimeFri: "08:00",
+      remainTime: "계산 전",
+      totalWorkingTime: "00:00",
+      workTimeMon: 8,
+      workTimeThu: 8,
+      workTimeTue: 8,
+      workTimeWed: 8,
+    });
   }
 
   public IsNumber = (value: string | number): boolean => {
@@ -252,6 +274,7 @@ class WorkingTimePage extends React.Component<{}, IState> {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column'}}>
           <div id="empty-div" style={{ flex: 1 }} />
+          <Button id="empty-div" color="secondary" variant="outlined" onClick={this.onResetButtonClick}>Reset</Button>
           <Typography variant="h5" component="div" style={{ color: 'darkgray' }}>
             전체 근무 시간
           </Typography>

@@ -6,6 +6,13 @@ import {
 const InfoPage = () => (
   <div>
     <UpdateDescription new>
+      {'2023.06.11'}<br />
+      {'- LocalStorage를 사용하여 쓰던 값을 저장해두고 사용하도록 수정'}<br />
+      {'- 쓰던 값을 Reset 할 수 있도록 수정'}<br />
+      {'- 일부 스타일 수정'}<br />
+    </UpdateDescription>
+    <hr />
+    <UpdateDescription>
       {'2023.06.07'}<br />
       {'- BottomNavigation 에 Router 적용'}<br />
       {'- 앱 이름 변경'}<br />
